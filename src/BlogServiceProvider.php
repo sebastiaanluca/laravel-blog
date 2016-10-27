@@ -2,27 +2,14 @@
 
 namespace SebastiaanLuca\Blog;
 
-use Illuminate\Support\ServiceProvider;
+use SebastiaanLuca\Blog\Providers\PackageServiceProvider;
 
-class BlogServiceProvider extends ServiceProvider
+class BlogServiceProvider extends PackageServiceProvider
 {
     /**
-     * Perform post-registration booting of services.
+     * The lowercase package name without vendor.
      *
-     * @return void
+     * @var string
      */
-    public function boot()
-    {
-        //
-    }
-    
-    /**
-     * Register any package services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
+    protected $package = 'blog';
 }
