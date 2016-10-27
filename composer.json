@@ -25,7 +25,7 @@
         "nwidart/laravel-modules": "dev-feature/refactor",
         "rinvex/repository": "dev-feature/add-entities as 2.0.1",
         "sebastiaanluca/laravel-helpers": "dev-develop",
-        "sebastiaanluca/laravel-router": "dev-develop as 2.0.*",
+        "sebastiaanluca/laravel-router": "dev-develop as 2.0.0",
         "sebastiaanluca/laravel-unbreakable-migrations": "dev-develop",
         "sebastiaanluca/laravel-validator": "dev-develop"
     },
