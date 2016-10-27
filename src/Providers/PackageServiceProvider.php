@@ -43,6 +43,12 @@ abstract class PackageServiceProvider extends ServiceProvider
      */
     protected function configure()
     {
+        // TODO: use this instead of __DIR__ everywhere + cache in a local variable if possible as it's used A LOT)
+        $reflect = new \ReflectionClass($this);
+        $path = dirname($reflect->getFileName());
+        
+        ddd(__DIR__, $path);
+        
         $this->mergeConfigFrom(
             __DIR__ . '/../config/config.php', $this->package
         );
