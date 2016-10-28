@@ -5,11 +5,14 @@ namespace SebastiaanLuca\Blog\Providers;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use SebastiaanLuca\Helpers\Classes\ReflectionTrait;
 
 // TODO: extract to laravel-packager
 // TODO: check if directories/files exist before using them
 abstract class PackageServiceProvider extends ServiceProvider
 {
+    use ReflectionTrait;
+    
     /**
      * The lowercase package name without vendor.
      *
@@ -43,14 +46,8 @@ abstract class PackageServiceProvider extends ServiceProvider
      */
     protected function configure()
     {
-        // TODO: use this instead of __DIR__ everywhere + cache in a local variable if possible as it's used A LOT)
-        $reflect = new \ReflectionClass($this);
-        $path = dirname($reflect->getFileName());
-        
-        ddd(__DIR__, $path);
-        
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/config.php', $this->package
+            $this->getClassDirectory() . '/../config/config.php', $this->package
         );
     }
     
@@ -76,14 +73,14 @@ abstract class PackageServiceProvider extends ServiceProvider
     protected function loadResources()
     {
         if (config('blog.use_package_migrations')) {
-            $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+            $this->loadMigrationsFrom($this->getClassDirectory() . '/../database/migrations');
         }
         
         // TODO: test if user vendor blog translations override these (even selectively)
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', $this->package);
+        $this->loadTranslationsFrom($this->getClassDirectory() . '/../resources/lang', $this->package);
         
         // TODO: test if user vendor blog views override these (even selectively)
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', $this->package);
+        $this->loadViewsFrom($this->getClassDirectory() . '/../resources/views', $this->package);
     }
     
     /**
@@ -92,23 +89,23 @@ abstract class PackageServiceProvider extends ServiceProvider
     protected function registerPublishableResources()
     {
         $this->publishes([
-            __DIR__ . '/../config/config.php' => config_path("{$this->package}.php"),
+            $this->getClassDirectory() . '/../config/config.php' => config_path("{$this->package}.php"),
         ], 'config');
         
         $this->publishes([
-            __DIR__ . '/../database/migrations/' => database_path('migrations')
+            $this->getClassDirectory() . '/../database/migrations/' => database_path('migrations')
         ], 'migrations');
         
         $this->publishes([
-            __DIR__ . '/../resources/lang' => resource_path("lang/vendor/{$this->package}"),
+            $this->getClassDirectory() . '/../resources/lang' => resource_path("lang/vendor/{$this->package}"),
         ], 'translations');
         
         $this->publishes([
-            __DIR__ . '/../views' => resource_path("views/vendor/{$this->package}"),
+            $this->getClassDirectory() . '/../views' => resource_path("views/vendor/{$this->package}"),
         ], 'views');
         
         $this->publishes([
-            __DIR__ . '/../resources/assets/dist' => public_path("vendor/{$this->package}"),
+            $this->getClassDirectory() . '/../resources/assets/dist' => public_path("vendor/{$this->package}"),
         ], 'assets');
     }
     
