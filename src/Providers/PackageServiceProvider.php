@@ -47,7 +47,7 @@ abstract class PackageServiceProvider extends ServiceProvider
     protected function configure()
     {
         $this->mergeConfigFrom(
-            $this->getClassDirectory() . '/../config/config.php', $this->package
+            $this->getClassDirectory() . '/../../config/config.php', $this->package
         );
     }
     

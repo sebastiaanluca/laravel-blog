@@ -1,8 +1,6 @@
 <?php
 
-namespace SebastiaanLuca\Blog;
-
-use SebastiaanLuca\Blog\Providers\PackageServiceProvider;
+namespace SebastiaanLuca\Blog\Providers;
 
 class BlogServiceProvider extends PackageServiceProvider
 {
