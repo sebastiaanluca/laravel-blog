@@ -2,10 +2,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 flex flex-items-md-middle">
-                <h1 class="navbar-brand"><a href="/" title="Back to home">Your App</a></h1>
+                <h1 class="navbar-brand"><a href="/" title="Back to home">Your Blog</a></h1>
                 <ul class="nav navbar-nav nav-pills">
                     <li class="nav-item active">
-                        <a href="#" title="Home" class="nav-link">Home <span class="sr-only">(current)</span></a>
+                        <a href="#" title="Home" class="nav-link">Posts <span class="sr-only">(current)</span></a>
                     </li>
                 </ul>
             </div>

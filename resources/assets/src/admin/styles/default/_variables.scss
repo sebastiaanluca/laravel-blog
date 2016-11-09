@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+
+//
+
+$gray-dark: #373A3C;
+$gray: #55595C;
+$gray-light: darken(#FFFFFF, 40);
+$gray-lighter: darken(#FFFFFF, 14);
+$gray-lightest: darken(#FFFFFF, 8);
+
+$brand-primary: #0275D8;
+$brand-success: #5CB85C;
+$brand-info: #5BC0DE;
+$brand-warning: #F0AD4E;
+$brand-danger: #D9534F;
+$brand-inverse: $gray-dark;
+
+$body-bg: darken(#FFFFFF, 6);
+
+$enable-flex: true;
+
+$font-family-sans-serif: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$line-height-base: 1.6;
+$font-size-root: 14px;
+$font-size-base: 1rem;
+$font-size-lg: 2rem;
+$small-font-size: 90%;
+
+$font-size-h1: 1.6rem;
+$font-size-h2: 1.6rem;
+$font-size-h3: 1.6rem;
+$headings-font-weight: 600;
+
+$navbar-padding-y: 1.4rem;
+$brand-inverse: #25282D;
+$nav-pills-active-link-bg: lighten($brand-inverse, 20);
+
+$border-radius: .3rem;
+$border-radius-lg: .3rem;
+$border-radius-sm: .2rem;
+
+$btn-padding-x: 1.4rem;
+$btn-padding-y: .8rem;
+$btn-font-weight: 600;
+
+$tag-default-bg: $gray-lightest;
+$tag-pill-border-radius: 4rem;
+$tag-font-size: 90%;
+$tag-font-weight: 600;
+$tag-pill-padding-x: 0;
+
+$card-border-width: 0;
+
+$dropdown-padding-y: 0;
+$dropdown-border-width: 0;
+$dropdown-bg: $gray-lightest;
+$dropdown-link-hover-bg: $gray-lighter;
+
+$popover-max-width: 320px;
+$popover-bg: $gray-lightest;
+$popover-border-width: 0;
+$popover-box-shadow: none;
+$popover-arrow-width: 8px;
+$popover-arrow-outer-color: $popover-bg;
+
+$alert-border-width: 0;
+
+$progress-fill: transparentize($gray-lighter, .9);
+
+//
+
+@import '~bootstrap/scss/variables';

@@ -16,7 +16,7 @@
     {{-- Styles--}}
     {{-- TODO: vendors.css --}}
     {{--<link href="{{ elixir('vendors.css', 'assets') }}" rel="stylesheet" type="text/css">--}}
-    {{--    <link href="{{ elixir('blog-admin.css', 'assets/vendor/blog/styles') }}" rel="stylesheet" type="text/css">--}}
+        <link href="{{ elixir('blog-admin.css', 'vendor/blog') }}" rel="stylesheet" type="text/css">
     @yield('styles')
 </head>
 
