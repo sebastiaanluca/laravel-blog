@@ -1,0 +1,50 @@
+/* Automated margins and paddings */
+
+$spacings: (
+    'margin',
+    'margin-top',
+    'margin-right',
+    'margin-bottom',
+    'margin-left',
+    'padding',
+    'padding-top',
+    'padding-right',
+    'padding-bottom',
+    'padding-left'
+);
+
+$spacingOptions: (
+    'none': 0,
+    'xxs': 5,
+    'xs': 10,
+    'sm': 20,
+    'md': 30,
+    'lg': 40,
+    'xl': 60,
+    'xxl': 80,
+);
+
+@each $spacing in $spacings {
+    @each $sKey, $sValue in $spacingOptions {
+        .#{$spacing}-#{$sKey} {
+            #{$spacing}: #{$sValue}px;
+        }
+    }
+}
+
+/* Flexing */
+
+.flex {
+    display: flex;
+}
+
+.inline-flex {
+    display: inline-flex;
+}
+
+/* Content */
+
+.content-wrapper {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+}

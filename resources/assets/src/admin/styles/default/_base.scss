@@ -66,3 +66,28 @@ body {
     line-height: $line-height-base;
     outline: none;
 }
+
+button[type="submit"] {
+    float: right;
+}
+
+.form-control-label {
+    font-weight: 600;
+}
+
+// Optional form label
+.form-optional label:after {
+    content: '(optional)';
+    margin-left: 4px;
+    font-weight: normal;
+    color: $text-muted;
+}
+
+.card {
+    box-shadow: 0 2px $gray-lightest;
+}
+
+.card-header {
+    padding: 1.25rem 1.25rem .75rem 1.25rem;
+    background: none;
+}
