@@ -7,8 +7,17 @@ body {
     padding-bottom: 3rem;
 }
 
+.container {
+    max-width: 960px;
+    @include make-container();
+}
+
 .flex {
     display: flex;
+}
+
+.navbar {
+    font-size: 1.2rem;
 }
 
 .navbar-brand,
@@ -24,52 +33,26 @@ body {
     }
 }
 
-.navbar-dark {
-    .nav-pills .nav-item.active a.nav-link {
-        background-color: lighten($brand-inverse, 10);
-        color: lighten($brand-inverse, 80);
-    }
-    
-    .nav-pills .nav-item a.nav-link:hover,
-    .nav-pills .nav-item.active a.nav-link:hover {
-        background-color: lighten($brand-inverse, 20);
-    }
+.navbar .nav-item + .nav-item {
+    margin-left: 2rem;
 }
 
-#nav-user {
-    color: #FFFFFF;
-    
-    .user-avatar {
-        margin-right: 8px;
-    }
-}
-
-.navbar-sub {
-    @extend .navbar-light;
-    background-color: #FFFFFF;
-    box-shadow: 0 1px $gray-lightest;
-    z-index: 0;
-    
-    .nav-item + .nav-item {
-        margin-left: .2rem;
-    }
-}
-
-.tag-pill span {
-    margin-left: .2rem;
-}
-
-.tag-pill span.sub {
+.navbar .tag.tag-default {
+    background-color: $gray-lighter;
     color: $gray-light;
 }
 
-.tag-pill.active span.sub {
-    color: lighten($gray, 20);
+#nav-user .user-avatar {
+    margin-right: 8px;
 }
 
 .btn-default {
     background-color: $gray-lightest;
     border: none;
+}
+
+.dropdown {
+    box-shadow: 0 1px $gray-lightest;
 }
 
 .dropdown-menu .dropdown-item {
@@ -82,69 +65,4 @@ body {
 .dropdown-menu .dropdown-item.btn {
     line-height: $line-height-base;
     outline: none;
-}
-
-.goal {
-    padding: 2rem 2rem;
-    background-color: #FFFFFF;
-    border-radius: $border-radius;
-    box-shadow: 0 2px $gray-lightest;
-    
-    & + .goal {
-        margin-top: 1rem;
-    }
-}
-
-.goal-icon {
-    margin-right: 2rem;
-    color: $gray-light;
-    font-size: $font-size-lg;
-}
-
-a.goal-title {
-    //color: inherit;
-}
-
-.goal-description-icon {
-    position: relative;
-    top: -1px;
-    margin-left: 2px;
-    color: $gray-lighter;
-    font-size: $font-size-base;
-}
-
-.goal-data {
-    font-size: $font-size-h3;
-    font-weight: 600;
-}
-
-@for $i from 1 through 100 {
-    .goal-progress-#{$i} {
-        background: linear-gradient(to right, $progress-fill 0%, $progress-fill percentage($i / 100), transparent percentage($i / 100)) #FFFFFF;
-    }
-}
-
-button[type="submit"] {
-    float: right;
-}
-
-.form-control-label {
-    font-weight: 600;
-}
-
-// Optional form label
-.form-optional label:after {
-    content: '(optional)';
-    margin-left: 4px;
-    font-weight: normal;
-    color: $text-muted;
-}
-
-.card {
-    box-shadow: 0 2px $gray-lightest;
-}
-
-.card-header {
-    padding: 1.25rem 1.25rem .75rem 1.25rem;
-    background: none;
 }

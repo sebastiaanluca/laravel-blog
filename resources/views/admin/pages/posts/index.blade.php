@@ -12,7 +12,7 @@
                 <div class="col-md-12">
                     
                     <div>
-                        <h3>{{ $post->title }}</h3>
+                        <h3><a href="{{ route('admin.posts.edit', $post->id) }}" title="Edit this post">{{ $post->title }}</a></h3>
                         {{ $post->published_at->format('j F Y') }}
                         <p>{{ $post->intro }}</p>
                     </div>

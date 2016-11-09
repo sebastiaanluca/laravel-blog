@@ -15,7 +15,7 @@ $brand-warning: #F0AD4E;
 $brand-danger: #D9534F;
 $brand-inverse: $gray-dark;
 
-$body-bg: darken(#FFFFFF, 6);
+$body-bg: darken(#FFFFFF, 4);
 
 $enable-flex: true;
 
@@ -32,8 +32,6 @@ $font-size-h3: 1.6rem;
 $headings-font-weight: 600;
 
 $navbar-padding-y: 1.4rem;
-$brand-inverse: #25282D;
-$nav-pills-active-link-bg: lighten($brand-inverse, 20);
 
 $border-radius: .3rem;
 $border-radius-lg: .3rem;
@@ -43,18 +41,16 @@ $btn-padding-x: 1.4rem;
 $btn-padding-y: .8rem;
 $btn-font-weight: 600;
 
-$tag-default-bg: $gray-lightest;
-$tag-pill-border-radius: 4rem;
-$tag-font-size: 90%;
-$tag-font-weight: 600;
-$tag-pill-padding-x: 0;
+$tag-font-weight: normal;
+$tag-padding-x: .4rem;
+$tag-padding-y: .4rem;
 
 $card-border-width: 0;
 
 $dropdown-padding-y: 0;
 $dropdown-border-width: 0;
-$dropdown-bg: $gray-lightest;
-$dropdown-link-hover-bg: $gray-lighter;
+$dropdown-bg: #FFFFFF;
+$dropdown-link-hover-bg: $gray-lightest;
 
 $popover-max-width: 320px;
 $popover-bg: $gray-lightest;
@@ -64,8 +60,6 @@ $popover-arrow-width: 8px;
 $popover-arrow-outer-color: $popover-bg;
 
 $alert-border-width: 0;
-
-$progress-fill: transparentize($gray-lighter, .9);
 
 //
 

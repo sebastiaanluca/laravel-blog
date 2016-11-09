@@ -14,9 +14,9 @@ class AdminRouter extends Router
     {
         // TODO: protect using auth middleware
         $this->router->group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'web'], function() {
-            $this->router->get('/', function() {
+            $this->router->get('/', ['as' => 'home', function() {
                 return redirect()->route('admin.posts.index');
-            });
+            }]);
             
             $this->router->resource('posts', PostController::class);
         });
