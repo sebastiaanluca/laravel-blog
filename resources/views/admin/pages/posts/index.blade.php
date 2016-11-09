@@ -9,8 +9,10 @@
     <h2>Posts</h2>
     
     @foreach($posts as $post)
-    
-        {{ $post->title }}
-        
+        <div>
+            <h3>{{ $post->title }}</h3>
+            {{ $post->published_at->format('j F Y') }}
+            <p>{{ $post->intro }}</p>
+        </div>
     @endforeach
 @stop
