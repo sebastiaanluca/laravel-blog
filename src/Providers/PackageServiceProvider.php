@@ -47,7 +47,7 @@ abstract class PackageServiceProvider extends ServiceProvider
     protected function configure()
     {
         $this->mergeConfigFrom(
-            $this->getClassDirectory() . '/../../config/config.php', $this->package
+            $this->getPackageDirectory() . '/config/config.php', $this->package
         );
     }
     
@@ -73,14 +73,14 @@ abstract class PackageServiceProvider extends ServiceProvider
     protected function loadResources()
     {
         if (config('blog.use_package_migrations')) {
-            $this->loadMigrationsFrom($this->getClassDirectory() . '/../database/migrations');
+            $this->loadMigrationsFrom($this->getPackageDirectory() . '/database/migrations');
         }
         
         // TODO: test if user vendor blog translations override these (even selectively)
-        $this->loadTranslationsFrom($this->getClassDirectory() . '/../resources/lang', $this->package);
+        $this->loadTranslationsFrom($this->getPackageDirectory() . '/resources/lang', $this->package);
         
         // TODO: test if user vendor blog views override these (even selectively)
-        $this->loadViewsFrom($this->getClassDirectory() . '/../resources/views', $this->package);
+        $this->loadViewsFrom($this->getPackageDirectory() . '/resources/views', $this->package);
     }
     
     /**
@@ -89,23 +89,23 @@ abstract class PackageServiceProvider extends ServiceProvider
     protected function registerPublishableResources()
     {
         $this->publishes([
-            $this->getClassDirectory() . '/../config/config.php' => config_path("{$this->package}.php"),
+            $this->getPackageDirectory() . '/config/config.php' => config_path("{$this->package}.php"),
         ], 'config');
         
         $this->publishes([
-            $this->getClassDirectory() . '/../database/migrations/' => database_path('migrations')
+            $this->getPackageDirectory() . '/database/migrations/' => database_path('migrations')
         ], 'migrations');
         
         $this->publishes([
-            $this->getClassDirectory() . '/../resources/lang' => resource_path("lang/vendor/{$this->package}"),
+            $this->getPackageDirectory() . '/resources/lang' => resource_path("lang/vendor/{$this->package}"),
         ], 'translations');
         
         $this->publishes([
-            $this->getClassDirectory() . '/../views' => resource_path("views/vendor/{$this->package}"),
+            $this->getPackageDirectory() . '/resources/views' => resource_path("views/vendor/{$this->package}"),
         ], 'views');
         
         $this->publishes([
-            $this->getClassDirectory() . '/../resources/assets/dist' => public_path("vendor/{$this->package}"),
+            $this->getPackageDirectory() . '/resources/assets/dist' => public_path("vendor/{$this->package}"),
         ], 'assets');
     }
     
@@ -126,5 +126,15 @@ abstract class PackageServiceProvider extends ServiceProvider
     protected function mapRoutes()
     {
         //
+    }
+    
+    /**
+     * Get the root package directory.
+     *
+     * @return string
+     */
+    protected function getPackageDirectory()
+    {
+        return $this->getClassDirectory() . '/../..';
     }
 }
