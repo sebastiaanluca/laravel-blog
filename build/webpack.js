@@ -7,8 +7,8 @@ const styleParser = new ExtractTextPlugin('styles/[name]-[hash].css')
 
 const config = {
     entry: {
-        blog: ['./resources/assets/scripts/src/public/public.js'],
-        'blog-admin': ['./resources/assets/scripts/src/admin/admin.js'],
+        //        blog: ['./resources/assets/scripts/src/public/public.js'],
+        'blog-admin': ['./resources/assets/src/admin/scripts/admin.js'],
     },
     output: {
         path: path.resolve(process.cwd(), 'public/vendor/blog'),
