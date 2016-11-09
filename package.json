@@ -61,7 +61,7 @@
   "scripts": {
     "gulp": "gulp",
     "build": "gulp",
-    "watch": "gulp watch",
-    "hot": "gulp hot"
+    "hot": "gulp hot",
+    "serve": "gulp serve"
   }
 }

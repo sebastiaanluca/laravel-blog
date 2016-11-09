@@ -20,7 +20,7 @@ gulp.task('hot', callback => {
 })
 
 gulp.task('serve', callback => {
-    runSequence('clean', 'webpack', ['webpack-watch', 'browsersync'], callback)
+    runSequence('clean', 'webpack', 'browsersync', 'webpack-watch', callback)
 })
 
 /* Individual tasks */
@@ -46,16 +46,17 @@ gulp.task('browsersync', callback => {
     browserSync.init({
         // Create a server to serve static files
         // https://www.browsersync.io/docs/options/#option-server
-        server: 'public',
+        proxy: process.env.SERVE_PROXY_TARGET,
         port: process.env.SERVE_PORT || 8080,
-        https: true,
+        //        https: true,
         
         // Prevent BrowserSync from automatically opening a browser window to the page
         open: false,
     })
     
     // Watch compiled file and template changes and do a full refresh
-    gulp.watch('/public/**/*').on('change', browserSync.reload)
+    gulp.watch('./public/**/*').on('change', browserSync.reload)
+    gulp.watch('./resources/views/**/*').on('change', browserSync.reload);
     
     callback()
 })

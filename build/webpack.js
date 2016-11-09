@@ -13,7 +13,7 @@ const config = {
     output: {
         path: path.resolve(process.cwd(), 'public/vendor/blog'),
         filename: 'scripts/[name]-[hash].js',
-        publicPath: '/assets/',
+        publicPath: 'vendor/blog',
     },
     module: {
         loaders: [
@@ -154,8 +154,25 @@ const config = {
     },
     devServer: {
         port: process.env.SERVE_PORT || 8080,
+        contentBase: 'public/vendor/blog',
+        publicPath: process.env.SERVE_PROXY_TARGET + '/vendor/blog',
+        hot: true,
         https: true,
-        contentBase: './public',
+        
+        proxy: {
+            '*': {
+                target: process.env.SERVE_PROXY_TARGET,
+                changeOrigin: true,
+                autoRewrite: true,
+                xfwd: true,
+                secure: false,
+            },
+        },
+        
+        watchOptions: {
+            aggregateTimeout: 20,
+            poll: 1000
+        },
     }
 }
 
