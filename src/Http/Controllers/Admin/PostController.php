@@ -6,6 +6,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use SebastiaanLuca\Blog\Http\Validators\PostStoreValidator;
+use SebastiaanLuca\Blog\Http\Validators\PostUpdateValidator;
 use SebastiaanLuca\Blog\Models\Post;
 
 class PostController extends Controller
@@ -57,8 +58,7 @@ class PostController extends Controller
     public function store(PostStoreValidator $validator) : RedirectResponse
     {
         $input = $validator->valid();
-        
-        $input['intro'] = trim(strstr($input['body'], '[endintro]', true));
+        $input = array_merge($input, $this->getIntroBlock($input['body']));
         
         $this->posts->create($input);
         
@@ -96,6 +96,7 @@ class PostController extends Controller
     /**
      * Update the given resource.
      *
+     * @param \SebastiaanLuca\Blog\Http\Validators\PostUpdateValidator $validator
      * @param string $id
      *
      * @return \Illuminate\Http\RedirectResponse
@@ -103,10 +104,14 @@ class PostController extends Controller
     public function update(PostUpdateValidator $validator, string $id) : RedirectResponse
     {
         $input = $validator->valid();
+        $input = array_merge($input, $this->getIntroBlock($input['body']));
         
-        $this->posts->update($id, $input);
+        // TODO: refactor to use repository (with exception throwing instead of returning a boolean)
+        $post = $this->posts->findOrFail($id);
         
-        return redirect()->route('posts.show', $id);
+        $post->update($input);
+        
+        return redirect()->route('admin.posts.index');
     }
     
     /**
@@ -120,6 +125,25 @@ class PostController extends Controller
     {
         $this->posts->delete($id);
         
-        return redirect()->route('posts.index');
+        return redirect()->route('admin.posts.index');
+    }
+    
+    /**
+     * Get a post's intro block from its body.
+     *
+     * @param string $body
+     * @param string $mark
+     *
+     * @return array
+     */
+    protected function getIntroBlock($body, $mark = '[endintro]')
+    {
+        $intro = trim(strstr($body, $mark, true));
+        
+        if (strlen($intro) === 0) {
+            return [];
+        }
+        
+        return compact('intro');
     }
 }

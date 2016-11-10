@@ -10,10 +10,12 @@
         <div class="row">
             <div class="col-md-12">
                 
-                <h2>{{ $post->title }} <span class="tag tag-small tag-default">edit</span></h2>
+                <h2>{{ $post->title }}</h2>
                 
                 <div class="margin-top-lg">
-                    {!! Form::model($post, ['route' => ['admin.posts.store']]) !!}
+                    {!! Form::model($post, ['route' => ['admin.posts.update', $post->id]]) !!}
+    
+                    {{ method_field('PUT') }}
                     
                     @if (count($errors) > 0)
                         <div class="alert alert-danger">
@@ -48,8 +50,8 @@
                             <div class="form-group {{ Html::highlightOnError('is_draft') }}">
                                 <label for="is_draft" class="form-control-label">Draft</label>
                                 <div class="onoffswitch onoffswitch-form-control">
-                                    {!! Form::hidden('is_draft', false) !!}
-                                    {!! Form::checkbox('is_draft', true, true, ['id' => 'is_draft', 'class' => 'onoffswitch-checkbox']) !!}
+                                    {!! Form::hidden('is_draft', 0) !!}
+                                    {!! Form::checkbox('is_draft', 1, null, ['id' => 'is_draft', 'class' => 'onoffswitch-checkbox']) !!}
                                     <label for="is_draft" class="onoffswitch-label"></label>
                                 </div>
                             </div>
@@ -57,7 +59,7 @@
                     </div>
                     
                     <div class="form-group {{ Html::highlightOnError('body') }}">
-                        {!! Form::textarea('body', null, ['id' => 'body', 'class' => 'form-control text-editor', 'maxlength' => 16383, 'rows' => 20, 'data-id' => 0]) !!}
+                        {!! Form::textarea('body', null, ['id' => 'body', 'class' => 'form-control text-editor', 'maxlength' => 16383, 'rows' => 20, 'data-id' => $post->id]) !!}
                         {!! Html::error('body') !!}
                     </div>
                     
