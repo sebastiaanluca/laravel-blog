@@ -3,7 +3,10 @@ const webpack = require('webpack')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-const styleParser = new ExtractTextPlugin('styles/[name]-[hash].css')
+const isProduction = process.env.APP_ENV === 'production'
+const defaultFilename = isProduction ? '[name]-[hash]' : '[name]'
+
+const styleParser = new ExtractTextPlugin(`styles/${defaultFilename}.css`)
 
 const config = {
     entry: {
@@ -12,7 +15,7 @@ const config = {
     },
     output: {
         path: path.resolve(process.cwd(), 'public/vendor/blog'),
-        filename: 'scripts/[name]-[hash].js',
+        filename: `scripts/${defaultFilename}.js`,
         publicPath: '/vendor/blog/',
     },
     module: {
@@ -50,7 +53,7 @@ const config = {
                 // Optimize images
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 loaders: [
-                    'file?name=[path][name]-[hash].[ext]&context=./resources/',
+                    `file?name=[path]${defaultFilename}.[ext]&context=./resources/`,
                     'image-webpack'
                 ]
             },
@@ -58,23 +61,23 @@ const config = {
             // Extract fonts from stylesheets, optimize, and copy to public assets directory
             {
                 test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=application/font-woff&name=./fonts/[name]/[hash].[ext]'
+                loader: 'url?limit=10000&mimetype=application/font-woff&name=./fonts/[name]/' + (isProduction ? '[hash]' : '[name]') + '.[ext]'
             },
             {
                 test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=application/font-woff&name=fonts/[name]/[hash].[ext]'
+                loader: 'url?limit=10000&mimetype=application/font-woff&name=fonts/[name]/' + (isProduction ? '[hash]' : '[name]') + '.[ext]'
             },
             {
                 test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=application/octet-stream&name=fonts/[name]/[hash].[ext]'
+                loader: 'url?limit=10000&mimetype=application/octet-stream&name=fonts/[name]/' + (isProduction ? '[hash]' : '[name]') + '.[ext]'
             },
             {
                 test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'file?&name=fonts/[name]/[hash].[ext]'
+                loader: 'file?&name=fonts/[name]/' + (isProduction ? '[hash]' : '[name]') + '.[ext]'
             },
             {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=image/svg+xml&name=fonts/[name]/[hash].[ext]'
+                loader: 'url?limit=10000&mimetype=image/svg+xml&name=fonts/[name]/' + (isProduction ? '[hash]' : '[name]') + '.[ext]'
             },
         ],
     },
@@ -206,4 +209,4 @@ if (process.env.APP_ENV === 'production') {
 }
 
 // Enable the configuration for external use
-module.exports = config;
+module.exports = config
