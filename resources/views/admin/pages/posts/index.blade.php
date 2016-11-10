@@ -13,7 +13,7 @@
                 
                 <div class="col-md-4">
                     <div class="card">
-                        <div class="card-block flex flex-rows full-height">
+                        <div class="card-block">
                             <h3 class="card-title">
                                 {{--TODO: route to post on blog (if not draft and published)--}}
                                 <a href="#" title="Edit this post">{{ $post->title }}</a>
@@ -22,13 +22,13 @@
                                 @endif
                             </h3>
                             
-                            <p class="card-text flex-md-top">{{ $post->intro ? str_limit($post->intro, 300) : str_limit($post->body, 300) }}</p>
+                            <p class="card-text ">{{ $post->intro ? str_limit($post->intro, 300) : str_limit($post->body, 300) }}</p>
                             
-                            <p class="card-text flex-md-bottom margin-bottom-none">
+                            <p class="card-text margin-bottom-none d-inline-block">
                                 <small class="text-muted" title="{{ $post->published_at->format('j F Y H:i') }}">{{ $post->published_at->diffForHumans() }}</small>
                             </p>
                             
-                            <div class="dropdown" style="margin-left: auto;">
+                            <div class="dropdown d-inline-block float-right">
                                 <button class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-gear"></span></button>
                                 <div class="dropdown-menu">
                                     <h6 class="dropdown-header">Options</h6>
@@ -37,6 +37,7 @@
                                     <a class="dropdown-item" href="#">@if($post->is_draft) Publish @else Mark as draft @endif</a>
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>

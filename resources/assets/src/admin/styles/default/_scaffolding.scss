@@ -14,20 +14,21 @@ $spacings: (
 );
 
 $spacingOptions: (
-    'none': 0,
-    'xxs': 5,
-    'xs': 10,
-    'sm': 20,
-    'md': 30,
-    'lg': 40,
-    'xl': 60,
-    'xxl': 80,
+    'none': '0px',
+    'xxs': '5px',
+    'xs': '10px',
+    'sm': '20px',
+    'md': '30px',
+    'lg': '40px',
+    'xl': '60px',
+    'xxl': '80px',
+    'auto': auto,
 );
 
 @each $spacing in $spacings {
     @each $sKey, $sValue in $spacingOptions {
         .#{$spacing}-#{$sKey} {
-            #{$spacing}: #{$sValue}px;
+            #{$spacing}: #{$sValue};
         }
     }
 }
@@ -48,6 +49,14 @@ $spacingOptions: (
 
 .full-height {
     height: 100%;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
 }
 
 /* Content */
