@@ -19,7 +19,7 @@ class CreateBlogPostsTable extends Migration
             $table->boolean('is_draft')->default(true);
             
             $table->string('title', 180);
-            $table->text('intro');
+            $table->text('intro')->nullable();
             $table->text('body');
             
             $table->timestamps();
