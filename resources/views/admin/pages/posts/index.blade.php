@@ -37,7 +37,7 @@
                                     <a class="dropdown-item" href="#">@if($post->is_draft) Publish @else Mark as draft @endif</a>
                                 </div>
                             </div>
-                            
+                        
                         </div>
                     </div>
                 </div>
