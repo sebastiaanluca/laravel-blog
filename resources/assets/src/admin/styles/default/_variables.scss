@@ -5,7 +5,7 @@
 $gray-dark: #373A3C;
 $gray: #55595C;
 $gray-light: darken(#FFFFFF, 40);
-$gray-lighter: darken(#FFFFFF, 14);
+$gray-lighter: darken(#FFFFFF, 20);
 $gray-lightest: darken(#FFFFFF, 8);
 
 $brand-primary: #0275D8;
@@ -44,6 +44,20 @@ $btn-font-weight: 600;
 $tag-font-weight: normal;
 $tag-padding-x: .4rem;
 $tag-padding-y: .4rem;
+
+$tag-default-bg: $gray-lighter;
+//$tag-primary-bg:            $brand-primary !default;
+//$tag-success-bg:            $brand-success !default;
+//$tag-info-bg:               $brand-info !default;
+//$tag-warning-bg:            $brand-warning !default;
+//$tag-danger-bg:             $brand-danger !default;
+
+$tag-color: $gray;
+//$tag-link-hover-color:      #fff !default;
+//$tag-font-size:             75% !default;
+//$tag-font-weight:           bold !default;
+//$tag-padding-x:             .4em !default;
+//$tag-padding-y:             .25em !default;
 
 $card-border-width: 0;
 

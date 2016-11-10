@@ -4,7 +4,6 @@ namespace SebastiaanLuca\Blog\Http\Controllers\Admin;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use SebastiaanLuca\Blog\Http\Validators\PostStoreValidator;
 use SebastiaanLuca\Blog\Models\Post;
@@ -59,8 +58,7 @@ class PostController extends Controller
     {
         $input = $validator->valid();
         
-        $endIntroMark = '[endintro]';
-        $input['intro'] = strstr($input['body'], $endIntroMark, true);
+        $input['intro'] = trim(strstr($input['body'], '[endintro]', true));
         
         $this->posts->create($input);
         
@@ -70,12 +68,11 @@ class PostController extends Controller
     /**
      * View a resource.
      *
-     * @param \Illuminate\Http\Request $request
      * @param string $id
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function show(Request $request, string $id) : View
+    public function show(string $id) : View
     {
         $post = $this->posts->findOrFail($id);
         
