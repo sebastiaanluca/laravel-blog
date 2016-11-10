@@ -12,7 +12,7 @@ class CreateBlogPostsTable extends Migration
     {
         $this->schema->create('blog_posts', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('slug', 180);
+            $table->string('slug', 180)->unique()->index();
             
             $table->softDeletes();
             $table->timestamp('published_at')->nullable();
@@ -23,8 +23,6 @@ class CreateBlogPostsTable extends Migration
             $table->text('body');
             
             $table->timestamps();
-            
-            $table->index('slug');
         });
     }
     

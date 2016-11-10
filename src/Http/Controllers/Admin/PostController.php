@@ -6,6 +6,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use SebastiaanLuca\Blog\Http\Validators\PostStoreValidator;
 use SebastiaanLuca\Blog\Models\Post;
 
 class PostController extends Controller
@@ -50,6 +51,7 @@ class PostController extends Controller
     /**
      * Create a new resource.
      *
+     * @param \SebastiaanLuca\Blog\Http\Validators\PostStoreValidator $validator
      *
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -57,9 +59,12 @@ class PostController extends Controller
     {
         $input = $validator->valid();
         
+        $endIntroMark = '[endintro]';
+        $input['intro'] = strstr($input['body'], $endIntroMark, true);
+        
         $this->posts->create($input);
         
-        return redirect()->route('posts.index');
+        return redirect()->route('admin.posts.index');
     }
     
     /**

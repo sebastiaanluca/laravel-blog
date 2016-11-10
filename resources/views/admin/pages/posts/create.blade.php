@@ -29,18 +29,18 @@
                                 {!! Html::error('title') !!}
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group {{ Html::highlightOnError('slug') }}">
                                 <label for="slug" class="form-control-label">Slug</label>
                                 {!! Form::text('slug', null, ['id' => 'slug', 'class' => 'form-control', 'maxlength' => 80, 'required']) !!}
                                 {!! Html::error('slug') !!}
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="form-group {{ Html::highlightOnError('published_at') }}">
-                                <label for="published_at" class="form-control-label">Publish date</label>
+                                <label for="published_at" class="form-control-label">Publish date and time</label>
                                 {{--TODO: add datetime + datepicker datetime option--}}
-                                {!! Form::date('published_at', \Carbon\Carbon::now(), ['id' => 'published_at', 'class' => 'form-control', 'maxlength' => 9]) !!}
+                                {!! Form::text('published_at', \Carbon\Carbon::now(), ['id' => 'published_at', 'class' => 'form-control', 'maxlength' => 9]) !!}
                                 {!! Html::error('published_at') !!}
                             </div>
                         </div>
@@ -48,6 +48,7 @@
                             <div class="form-group {{ Html::highlightOnError('is_draft') }}">
                                 <label for="is_draft" class="form-control-label">Draft</label>
                                 <div class="onoffswitch onoffswitch-form-control">
+                                    {!! Form::hidden('is_draft', false) !!}
                                     {!! Form::checkbox('is_draft', true, true, ['id' => 'is_draft', 'class' => 'onoffswitch-checkbox']) !!}
                                     <label for="is_draft" class="onoffswitch-label"></label>
                                 </div>
