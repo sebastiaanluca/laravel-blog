@@ -21,32 +21,53 @@
                         </div>
                     @endif
                     
-                    <div class="form-group {{ Html::highlightOnError('title') }}">
-                        <label for="title" class="form-control-label">Title</label>
-                        {!! Form::text('title', null, ['id' => 'title', 'class' => 'form-control', 'maxlength' => 80, 'required']) !!}
-                        {!! Html::error('title') !!}
+                    <div class="row">
+                        <div class="col-md">
+                            <div class="form-group {{ Html::highlightOnError('title') }}">
+                                <label for="title" class="form-control-label">Title</label>
+                                {!! Form::text('title', null, ['id' => 'title', 'class' => 'form-control', 'maxlength' => 80, 'required']) !!}
+                                {!! Html::error('title') !!}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group {{ Html::highlightOnError('slug') }}">
+                                <label for="slug" class="form-control-label">Slug</label>
+                                {!! Form::text('slug', null, ['id' => 'slug', 'class' => 'form-control', 'maxlength' => 80, 'required']) !!}
+                                {!! Html::error('slug') !!}
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group {{ Html::highlightOnError('published_at') }}">
+                                <label for="published_at" class="form-control-label">Publish date</label>
+                                {{--TODO: add datetime + datepicker datetime option--}}
+                                {!! Form::date('published_at', \Carbon\Carbon::now(), ['id' => 'published_at', 'class' => 'form-control', 'maxlength' => 9]) !!}
+                                {!! Html::error('published_at') !!}
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group {{ Html::highlightOnError('is_draft') }}">
+                                <label for="is_draft" class="form-control-label">Draft</label>
+                                <div class="onoffswitch onoffswitch-form-control">
+                                    {!! Form::checkbox('is_draft', true, null, ['id' => 'is_draft', 'class' => 'onoffswitch-checkbox']) !!}
+                                    <label for="is_draft" class="onoffswitch-label"></label>
+                                </div>
+                                {{--
+                                <label class="custom-control custom-checkbox">
+                                    {!! Form::checkbox('name', true, null, ['class' => 'custom-control-input']) !!}
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Draft</span>
+                                </label>
+                                --}}
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div class="form-group {{ Html::highlightOnError('slug') }}">
-                        <label for="slug" class="form-control-label">Slug</label>
-                        {!! Form::text('slug', null, ['id' => 'slug', 'class' => 'form-control', 'maxlength' => 80, 'required']) !!}
-                        {!! Html::error('slug') !!}
-                    </div>
-                    
-                    {{--
-                    <div class="form-group form-optional {{ Html::highlightOnError('end_at') }}">
-                        <label for="end_at" class="form-control-label">Deadline</label>
-                        {!! Form::date('end_at', null, ['id' => 'end_at', 'class' => 'form-control', 'maxlength' => 9]) !!}
-                        {!! Html::error('end_at') !!}
-                    </div>
-                    --}}
                     
                     <div class="form-group {{ Html::highlightOnError('body') }}">
-                        {!! Form::textarea('body', null, ['id' => 'reason', 'class' => 'form-control', 'maxlength' => 16383, 'rows' => 20]) !!}
+                        {!! Form::textarea('body', null, ['id' => 'body', 'class' => 'form-control', 'maxlength' => 16383, 'rows' => 20]) !!}
                         {!! Html::error('body') !!}
                     </div>
                     
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                     
                     {!! Form::close() !!}
                 </div>
