@@ -33,7 +33,7 @@ class PostController extends Controller
      */
     public function index() : View
     {
-        $posts = $this->posts->all();
+        $posts = $this->posts->orderBy('published_at', 'DESC')->get();
         
         return view('blog::admin/pages/posts/index', compact('posts'));
     }

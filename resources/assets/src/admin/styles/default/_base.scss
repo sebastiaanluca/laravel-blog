@@ -52,14 +52,19 @@ body {
     border: none;
 }
 
-.dropdown {
-    box-shadow: 0 1px $gray-lightest;
+.dropdown-menu {
+    box-shadow: 0 1px 10px $gray-lightest;
 }
 
+.dropdown-menu .dropdown-header,
 .dropdown-menu .dropdown-item {
     padding-top: .6rem;
     padding-bottom: .6rem;
     border-radius: $border-radius;
+}
+
+.dropdown-menu .dropdown-header {
+    padding-bottom: .1rem;
 }
 
 .dropdown-menu .dropdown-item.button,
@@ -84,6 +89,8 @@ button[type="submit"] {
     color: $text-muted;
 }
 
+/* Cards */
+
 .card {
     box-shadow: 0 2px $gray-lightest;
 }
@@ -91,4 +98,31 @@ button[type="submit"] {
 .card-header {
     padding: 1.25rem 1.25rem .75rem 1.25rem;
     background: none;
+}
+
+.card-title {
+    margin-bottom: 1.2rem;
+    
+    a {
+        color: inherit;
+    }
+}
+
+@mixin row-gutter-size($size) {
+    margin-right: -$size;
+    margin-left: -$size;
+    
+    & > [class^="col-"],
+    & > [class*=" col-"] {
+        padding-right: $size;
+        padding-left: $size;
+    }
+}
+
+.post-cards-list {
+    @include row-gutter-size(.5rem);
+    
+    .card {
+        margin-bottom: .5rem * 2;
+    }
 }
