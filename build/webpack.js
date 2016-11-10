@@ -13,7 +13,7 @@ const config = {
     output: {
         path: path.resolve(process.cwd(), 'public/vendor/blog'),
         filename: 'scripts/[name]-[hash].js',
-        publicPath: 'vendor/blog',
+        publicPath: '/vendor/blog/',
     },
     module: {
         loaders: [
