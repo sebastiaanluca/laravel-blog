@@ -24,9 +24,19 @@ We accept contributions via Pull Requests on [Github](https://github.com/sebasti
 
 ## Development
 
-# Symlink dev build directory
+Note: execute all commands in the root of the package.
+
+### Symlink dev build directory
 
 Symlink local dev build dir to `public/vendor/blog`.
+
+### Build assets
+
+`yarn run build`
+
+### Auto-reloading server
+
+`yarn run serve`
 
 ## Running Tests
 
