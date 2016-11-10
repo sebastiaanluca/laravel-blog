@@ -48,22 +48,15 @@
                             <div class="form-group {{ Html::highlightOnError('is_draft') }}">
                                 <label for="is_draft" class="form-control-label">Draft</label>
                                 <div class="onoffswitch onoffswitch-form-control">
-                                    {!! Form::checkbox('is_draft', true, null, ['id' => 'is_draft', 'class' => 'onoffswitch-checkbox']) !!}
+                                    {!! Form::checkbox('is_draft', true, true, ['id' => 'is_draft', 'class' => 'onoffswitch-checkbox']) !!}
                                     <label for="is_draft" class="onoffswitch-label"></label>
                                 </div>
-                                {{--
-                                <label class="custom-control custom-checkbox">
-                                    {!! Form::checkbox('name', true, null, ['class' => 'custom-control-input']) !!}
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-description">Draft</span>
-                                </label>
-                                --}}
                             </div>
                         </div>
                     </div>
                     
                     <div class="form-group {{ Html::highlightOnError('body') }}">
-                        {!! Form::textarea('body', null, ['id' => 'body', 'class' => 'form-control', 'maxlength' => 16383, 'rows' => 20]) !!}
+                        {!! Form::textarea('body', null, ['id' => 'body', 'class' => 'form-control text-editor', 'maxlength' => 16383, 'rows' => 20, 'data-id' => 0]) !!}
                         {!! Html::error('body') !!}
                     </div>
                     

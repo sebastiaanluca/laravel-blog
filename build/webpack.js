@@ -129,28 +129,29 @@ const config = {
         // Find duplicate dependencies & prevents duplicate inclusion
         new webpack.optimize.DedupePlugin(),
         
-        /* Provide global support for vendor libraries */
-        
+        // Provide global support for vendor libraries
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
             'window.jQuery': 'jquery',
-        }),
-        
-        new webpack.ProvidePlugin({
+            
             _: 'lodash',
-        }),
-        
-        new webpack.ProvidePlugin({
+            
             tether: 'tether',
             Tether: 'tether',
             'window.Tether': 'tether',
+            
+            CodeMirror: 'codemirror'
         }),
     ],
     resolve: {
         alias: {
             'jquery': path.resolve(process.cwd(), 'node_modules/jquery/src/jquery'),
         }
+    },
+    node: {
+        // Fixes SimpleMDE package (see https://github.com/NextStepWebs/simplemde-markdown-editor/issues/150)
+        fs: 'empty'
     },
     devServer: {
         port: process.env.SERVE_PORT || 8080,

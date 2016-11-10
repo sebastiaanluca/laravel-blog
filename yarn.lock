@@ -993,6 +993,16 @@ code-point-at@^1.0.0:
   dependencies:
     number-is-nan "^1.0.0"
 
+codemirror-spell-checker@*:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/codemirror-spell-checker/-/codemirror-spell-checker-1.1.2.tgz#1c660f9089483ccb5113b9ba9ca19c3f4993371e"
+  dependencies:
+    typo-js "*"
+
+codemirror@*:
+  version "5.20.2"
+  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.20.2.tgz#918e0ece96d57a99030b2f8b33011284bed5217a"
+
 colors@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/colors/-/colors-1.1.2.tgz#168a4701756b6a7f51a12ce0c97bfa28c084ed63"
@@ -2716,6 +2726,10 @@ map-obj@^1.0.0, map-obj@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-1.0.1.tgz#d933ceb9205d82bdcf4886f6742bdc2b4dea146d"
 
+marked@*:
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.6.tgz#b2c6c618fccece4ef86c4fc6cb8a7cbf5aeda8d7"
+
 media-typer@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
@@ -3779,6 +3793,14 @@ signal-exit@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.1.tgz#5a4c884992b63a7acd9badb7894c3ee9cfccad81"
 
+simplemde:
+  version "1.11.2"
+  resolved "https://registry.yarnpkg.com/simplemde/-/simplemde-1.11.2.tgz#a23a35d978d2c40ef07dec008c92f070d8e080e3"
+  dependencies:
+    codemirror "*"
+    codemirror-spell-checker "*"
+    marked "*"
+
 single-module-instance-webpack-plugin@0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/single-module-instance-webpack-plugin/-/single-module-instance-webpack-plugin-0.0.4.tgz#5b96b941c84a899252bfa374b8220c7b1b2be64a"
@@ -4149,6 +4171,10 @@ type-is@~1.6.13:
   dependencies:
     media-typer "0.3.0"
     mime-types "~2.1.11"
+
+typo-js@*:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/typo-js/-/typo-js-1.0.1.tgz#1b15749fdea49ca6227665aed89545ec2eb1ea25"
 
 ua-parser-js@0.7.10:
   version "0.7.10"
