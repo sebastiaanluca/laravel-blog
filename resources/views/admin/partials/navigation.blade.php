@@ -4,7 +4,7 @@
             <div class="col-md-8 flex flex-items-md-middle">
                 <ul class="nav navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('admin.posts.index') }}" title="Posts">Posts <span class="tag tag-default">11</span> <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{ route('admin.posts.index') }}" title="Posts">Posts <span class="tag tag-default">{{ $totalPostCount }}</span> <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" title="Media">Media</a>
