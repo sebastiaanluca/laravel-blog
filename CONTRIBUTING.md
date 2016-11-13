@@ -26,6 +26,15 @@ We accept contributions via Pull Requests on [Github](https://github.com/sebasti
 
 Note: execute all commands in the root of the package.
 
+### Autoload
+
+`composer install` in the package directory + add to `bootstrap/autoload.php`:
+
+```
+// Autoload our package's vendors
+require __DIR__.'/../packages/sebastiaanluca/blog/vendor/autoload.php';
+```
+
 ### Symlink dev build directory
 
 Symlink local dev build dir to `public/vendor/blog`.
