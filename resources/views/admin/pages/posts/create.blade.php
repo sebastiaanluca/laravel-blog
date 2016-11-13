@@ -32,7 +32,7 @@
                         <div class="col-md-3">
                             <div class="form-group {{ Html::highlightOnError('slug') }}">
                                 <label for="slug" class="form-control-label">Slug</label>
-                                {!! Form::text('slug', null, ['id' => 'slug', 'class' => 'form-control', 'maxlength' => 80, 'required']) !!}
+                                <slug-input-field id="slug" name="slug" class="form-control" value="{{ old('slug') }}" maxlength="80" required></slug-input-field>
                                 {!! Html::error('slug') !!}
                             </div>
                         </div>
@@ -40,7 +40,7 @@
                             <div class="form-group {{ Html::highlightOnError('published_at') }}">
                                 <label for="published_at" class="form-control-label">Publish date and time</label>
                                 {{--TODO: add datetime + datepicker datetime option--}}
-                                {!! Form::text('published_at', \Carbon\Carbon::now(), ['id' => 'published_at', 'class' => 'form-control', 'maxlength' => 19]) !!}
+                                {!! Form::date('published_at', \Carbon\Carbon::now(), ['id' => 'published_at', 'class' => 'form-control', 'maxlength' => 19]) !!}
                                 {!! Html::error('published_at') !!}
                             </div>
                         </div>
@@ -58,6 +58,7 @@
                     
                     <div class="form-group {{ Html::highlightOnError('body') }}">
                         {!! Form::textarea('body', null, ['id' => 'body', 'class' => 'form-control text-editor', 'maxlength' => 16383, 'rows' => 20, 'data-id' => 0]) !!}
+                        {{--<markdown-editor class="form-control"></markdown-editor>--}}
                         {!! Html::error('body') !!}
                     </div>
                     

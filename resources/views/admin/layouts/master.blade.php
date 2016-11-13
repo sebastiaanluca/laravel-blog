@@ -7,7 +7,7 @@
     
     <title>
         @hasSection('title')
-        @yield('title') - Blog
+            @yield('title') - Blog
         @else
             Blog
         @endif
@@ -16,14 +16,16 @@
     {{-- Styles--}}
     {{-- TODO: vendors.css --}}
     {{--<link href="{{ elixir('vendors.css', 'assets') }}" rel="stylesheet" type="text/css">--}}
-        <link href="{{ elixir('blog-admin.css', 'vendor/blog') }}" rel="stylesheet" type="text/css">
+    <link href="{{ elixir('blog-admin.css', 'vendor/blog') }}" rel="stylesheet" type="text/css">
     @yield('styles')
 </head>
 
 <body class="@yield('bodyClass')">
     @include('blog::admin/partials/navigation')
     
-    @yield('content')
+    <div id="blog-admin">
+        @yield('content')
+    </div>
     
     @include('blog::admin/partials/footer')
     

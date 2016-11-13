@@ -150,6 +150,7 @@ const config = {
     resolve: {
         alias: {
             'jquery': path.resolve(process.cwd(), 'node_modules/jquery/src/jquery'),
+            'vue$': 'vue/dist/vue.js',
         }
     },
     node: {

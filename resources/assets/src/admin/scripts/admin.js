@@ -5,17 +5,25 @@ import 'bootstrap-datepicker'
 import SimpleMDE from 'simplemde'
 import 'simplemde/debug/simplemde.css'
 import Vue from 'vue'
+import SlugInputField from './components/slug-input-field/slug-input-field.vue'
 
 //
 
 new Vue({
-    created: function () {
+    el: '#blog-admin',
+    
+    components: {
+        SlugInputField,
+    },
+    
+    mounted: function () {
         console.log('admin module loaded')
         
         this.initPopOvers()
         this.initDateInputFields()
         this.initTextEditors()
     },
+    
     methods: {
         initPopOvers: function () {
             $(function () {
@@ -23,6 +31,7 @@ new Vue({
             })
         },
         
+        // TODO: move to Vue component
         initDateInputFields: function () {
             $('input.input-date').each(function () {
                 const locale = $(this).data('locale')
@@ -40,6 +49,7 @@ new Vue({
             })
         },
         
+        // TODO: move to Vue component
         initTextEditors: function () {
             $('.text-editor').each(function () {
                 const editorId = 'simplemde-editor-' + $(this).data('id')
