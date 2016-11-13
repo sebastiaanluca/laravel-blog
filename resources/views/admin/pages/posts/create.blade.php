@@ -32,7 +32,7 @@
                         <div class="col-md-3">
                             <div class="form-group {{ Html::highlightOnError('slug') }}">
                                 <label for="slug" class="form-control-label">Slug</label>
-                                <slug-input-field id="slug" name="slug" class="form-control" value="{{ old('slug') }}" maxlength="80" required></slug-input-field>
+                                <slug-input-field id="slug" name="slug" class="form-control" value="{{ old('slug') }}" maxlength="80" read-from="#title" required></slug-input-field>
                                 {!! Html::error('slug') !!}
                             </div>
                         </div>
