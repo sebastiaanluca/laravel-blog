@@ -28,7 +28,7 @@ class AdminRouter extends Router
     
     protected function mapAuthRoutes()
     {
-        $this->router->group(['prefix' => 'admin', 'as' => 'blog::admin.', 'middleware' => 'web'], function() {
+        $this->router->group(['prefix' => 'admin', 'as' => 'blog::admin.', 'middleware' => ['web', 'blog.guest']], function() {
             $this->router->get('login', ['as' => 'auth.login', 'uses' => LoginController::class . '@showLoginForm']);
             $this->router->post('login', ['as' => 'auth.login.post', 'uses' => LoginController::class . '@login']);
             $this->router->post('logout', ['as' => 'auth.logout.post', 'uses' => LoginController::class . '@logout']);
