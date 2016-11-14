@@ -2,6 +2,7 @@
 
 namespace SebastiaanLuca\Blog\Http\Routers;
 
+use SebastiaanLuca\Blog\Http\Controllers\Admin\Auth\LoginController;
 use SebastiaanLuca\Blog\Http\Controllers\Admin\PostController;
 use SebastiaanLuca\Router\Routers\Router;
 
@@ -12,11 +13,16 @@ class AdminRouter extends Router
      */
     public function map()
     {
-        // TODO: protect using auth middleware
-        $this->router->group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'web'], function() {
+        $this->router->group(['prefix' => 'admin', 'as' => 'blog::admin.', 'middleware' => 'web'], function() {
+            $this->router->get('login', ['as' => 'auth.login', 'uses' => LoginController::class . '@showLoginForm']);
+            $this->router->post('login', ['as' => 'auth.login.post', 'uses' => LoginController::class . '@login']);
+            $this->router->post('logout', ['as' => 'auth.logout.post', 'uses' => LoginController::class . '@logout']);
+        });
+        
+        $this->router->group(['prefix' => 'admin', 'as' => 'blog::admin.', 'middleware' => ['web', 'auth']], function() {
             $this->router->get('/', [
                 'as' => 'home', function() {
-                    return redirect()->route('admin.posts.index');
+                    return redirect()->route('blog::admin.posts.index');
                 }
             ]);
             
