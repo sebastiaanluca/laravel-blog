@@ -23,6 +23,11 @@ export default {
             this.value = this.slugify(this.value)
             
             this.hasManualInput = !!this.value
+            
+            // Set from source
+            if (this.readFrom && !this.hasManualInput) {
+                this.updateFieldFromSource()
+            }
         },
         
         bindSource: function () {
