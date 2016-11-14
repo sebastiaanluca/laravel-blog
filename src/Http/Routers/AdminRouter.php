@@ -26,11 +26,17 @@ class AdminRouter extends Router
         });
     }
     
+    /**
+     * Map blog admin authentication routes.
+     */
     protected function mapAuthRoutes()
     {
         $this->router->group(['prefix' => 'admin', 'as' => 'blog::admin.', 'middleware' => ['web', 'blog.guest']], function() {
             $this->router->get('login', ['as' => 'auth.login', 'uses' => LoginController::class . '@showLoginForm']);
             $this->router->post('login', ['as' => 'auth.login.post', 'uses' => LoginController::class . '@login']);
+        });
+        
+        $this->router->group(['prefix' => 'admin', 'as' => 'blog::admin.', 'middleware' => ['web', 'blog.auth']], function() {
             $this->router->post('logout', ['as' => 'auth.logout.post', 'uses' => LoginController::class . '@logout']);
         });
     }
