@@ -13,13 +13,9 @@ class AdminRouter extends Router
      */
     public function map()
     {
-        $this->router->group(['prefix' => 'admin', 'as' => 'blog::admin.', 'middleware' => 'web'], function() {
-            $this->router->get('login', ['as' => 'auth.login', 'uses' => LoginController::class . '@showLoginForm']);
-            $this->router->post('login', ['as' => 'auth.login.post', 'uses' => LoginController::class . '@login']);
-            $this->router->post('logout', ['as' => 'auth.logout.post', 'uses' => LoginController::class . '@logout']);
-        });
+        $this->mapAuthRoutes();
         
-        $this->router->group(['prefix' => 'admin', 'as' => 'blog::admin.', 'middleware' => ['web', 'auth']], function() {
+        $this->router->group(['prefix' => 'admin', 'as' => 'blog::admin.', 'middleware' => ['web', 'blog.auth']], function() {
             $this->router->get('/', [
                 'as' => 'home', function() {
                     return redirect()->route('blog::admin.posts.index');
@@ -27,6 +23,15 @@ class AdminRouter extends Router
             ]);
             
             $this->router->resource('posts', PostController::class);
+        });
+    }
+    
+    protected function mapAuthRoutes()
+    {
+        $this->router->group(['prefix' => 'admin', 'as' => 'blog::admin.', 'middleware' => 'web'], function() {
+            $this->router->get('login', ['as' => 'auth.login', 'uses' => LoginController::class . '@showLoginForm']);
+            $this->router->post('login', ['as' => 'auth.login.post', 'uses' => LoginController::class . '@login']);
+            $this->router->post('logout', ['as' => 'auth.logout.post', 'uses' => LoginController::class . '@logout']);
         });
     }
 }

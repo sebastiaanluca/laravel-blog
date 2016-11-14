@@ -19,7 +19,9 @@ $ composer require sebastiaanluca/laravel-blog
 
 ## Usage
 
-TODO
+- User model
+- At least one active user
+- Publish assets, etc
 
 ## Change log
 
