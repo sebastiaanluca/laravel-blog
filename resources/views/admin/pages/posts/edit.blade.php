@@ -41,8 +41,7 @@
                         <div class="col-md-3">
                             <div class="form-group {{ Html::highlightOnError('published_at') }}">
                                 <label for="published_at" class="form-control-label">Publish date and time</label>
-                                {{--TODO: add datetime + datepicker datetime option--}}
-                                {!! Form::text('published_at', \Carbon\Carbon::now(), ['id' => 'published_at', 'class' => 'form-control', 'maxlength' => 9]) !!}
+                                {!! Form::date('published_at', \Carbon\Carbon::now(), ['id' => 'published_at', 'class' => 'form-control', 'maxlength' => 9]) !!}
                                 {!! Html::error('published_at') !!}
                             </div>
                         </div>
