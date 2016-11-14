@@ -15,8 +15,7 @@
                     <div class="card">
                         <div class="card-block">
                             <h3 class="card-title">
-                                {{--TODO: route to post on blog (if not draft and published)--}}
-                                <a href="#" title="Edit this post">{{ $post->title }}</a>
+                                <a href="{{ route('blog::admin.posts.edit', $post->id) }}" title="Edit this post">{{ $post->title }}</a>
                                 @if($post->is_draft)
                                     <span class="tag tag-default tag-outline">draft</span>
                                 @endif
