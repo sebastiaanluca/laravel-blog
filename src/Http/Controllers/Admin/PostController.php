@@ -160,9 +160,7 @@ class PostController extends Controller
      */
     protected function getPublishedAtDate(string $date) : string
     {
-        if (! $date) {
-            $date = Carbon::now();
-        }
+        $date = ! $date ? Carbon::now() : Carbon::createFromFormat('d/m/Y', $date);
         
         $date = $date->setTime(0, 0, 0);
         
