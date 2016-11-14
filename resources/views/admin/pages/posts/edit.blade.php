@@ -40,7 +40,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group {{ Html::highlightOnError('published_at') }}">
-                                <label for="published_at" class="form-control-label">Publish date and time</label>
+                                <label for="published_at" class="form-control-label">Publish date</label>
                                 {!! Form::date('published_at', old('published_at') ?? $post->published_at ?? \Carbon\Carbon::now(), ['id' => 'published_at', 'class' => 'form-control', 'maxlength' => 9]) !!}
                                 {!! Html::error('published_at') !!}
                             </div>
