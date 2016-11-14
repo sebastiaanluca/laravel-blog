@@ -9,6 +9,7 @@ const defaultFilename = isProduction ? '[name]-[hash]' : '[name]'
 const styleParser = new ExtractTextPlugin(`styles/${defaultFilename}.css`)
 
 const config = {
+    devtool: 'cheap-module-eval-source-map',
     entry: {
         //        blog: ['./resources/assets/scripts/src/public/public.js'],
         'blog-admin': ['./resources/assets/src/admin/scripts/admin.js'],
