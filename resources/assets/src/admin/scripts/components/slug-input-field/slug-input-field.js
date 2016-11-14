@@ -4,6 +4,7 @@ export default {
     mounted: function () {
         console.log('slug-input-field component loaded')
         
+        this.setDefaults()
         this.bindSource()
     },
     
@@ -13,21 +14,15 @@ export default {
     
     data: function () {
         return {
-            value: '',
+            value: null,
             hasManualInput: false,
         }
     },
     
     methods: {
-        onBlur: function () {
-            this.value = this.slugify(this.value)
-            
-            this.hasManualInput = !!this.value
-            
-            // Set from source
-            if (this.readFrom && !this.hasManualInput) {
-                this.updateFieldFromSource()
-            }
+        setDefaults: function () {
+            this.value = this.$el.value
+            this.hasManualInput = !!this.$el.value
         },
         
         bindSource: function () {
@@ -49,6 +44,17 @@ export default {
         
         slugify: function (text) {
             return slug(text).toLowerCase()
+        },
+        
+        onBlur: function () {
+            this.value = this.slugify(this.value)
+            
+            this.hasManualInput = !!this.value
+            
+            // Set from source
+            if (this.readFrom && !this.hasManualInput) {
+                this.updateFieldFromSource()
+            }
         },
     },
 }

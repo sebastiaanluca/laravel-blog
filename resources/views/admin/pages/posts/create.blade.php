@@ -57,7 +57,7 @@
                     </div>
                     
                     <div class="form-group {{ Html::highlightOnError('body') }}">
-                        {!! Form::textarea('body', null, ['id' => 'body', 'class' => 'form-control text-editor', 'maxlength' => 16383, 'rows' => 20, 'data-id' => 0]) !!}
+                        {!! Form::textarea('body', null, ['id' => 'body', 'class' => 'form-control text-editor', 'maxlength' => 16383, 'rows' => 20, 'autofocus', 'data-id' => 0]) !!}
                         {{--<markdown-editor class="form-control"></markdown-editor>--}}
                         {!! Html::error('body') !!}
                     </div>

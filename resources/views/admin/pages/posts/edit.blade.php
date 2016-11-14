@@ -34,7 +34,7 @@
                         <div class="col-md-3">
                             <div class="form-group {{ Html::highlightOnError('slug') }}">
                                 <label for="slug" class="form-control-label">Slug</label>
-                                {!! Form::text('slug', null, ['id' => 'slug', 'class' => 'form-control', 'maxlength' => 80, 'required']) !!}
+                                <slug-input-field id="slug" name="slug" class="form-control" value="{{ old('slug') ?? $post->slug }}" maxlength="80" read-from="#title" required></slug-input-field>
                                 {!! Html::error('slug') !!}
                             </div>
                         </div>
@@ -59,7 +59,7 @@
                     </div>
                     
                     <div class="form-group {{ Html::highlightOnError('body') }}">
-                        {!! Form::textarea('body', null, ['id' => 'body', 'class' => 'form-control text-editor', 'maxlength' => 16383, 'rows' => 20, 'data-id' => $post->id]) !!}
+                        {!! Form::textarea('body', null, ['id' => 'body', 'class' => 'form-control text-editor', 'maxlength' => 16383, 'rows' => 20, 'autofocus', 'data-id' => $post->id]) !!}
                         {!! Html::error('body') !!}
                     </div>
                     
