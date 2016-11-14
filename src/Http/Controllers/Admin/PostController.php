@@ -2,6 +2,7 @@
 
 namespace SebastiaanLuca\Blog\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
@@ -59,6 +60,7 @@ class PostController extends Controller
     {
         $input = $validator->valid();
         $input = array_merge($input, $this->getIntroBlock($input['body']));
+        $input['published_at'] = $this->getPublishedAtDate($input['published_at']);
         
         $this->posts->create($input);
         
@@ -103,11 +105,13 @@ class PostController extends Controller
      */
     public function update(PostUpdateValidator $validator, string $id) : RedirectResponse
     {
+        // TODO: refactor to use repository (with exception throwing instead of returning a boolean)
+        $post = $this->posts->findOrFail($id);
+        
         $input = $validator->valid();
         $input = array_merge($input, $this->getIntroBlock($input['body']));
         
-        // TODO: refactor to use repository (with exception throwing instead of returning a boolean)
-        $post = $this->posts->findOrFail($id);
+        $input['published_at'] = $this->getPublishedAtDate($input['published_at']);
         
         $post->update($input);
         
@@ -145,5 +149,23 @@ class PostController extends Controller
         }
         
         return compact('intro');
+    }
+    
+    /**
+     * Get a valid publish date.
+     *
+     * @param string $date
+     *
+     * @return string
+     */
+    protected function getPublishedAtDate(string $date) : string
+    {
+        if (! $date) {
+            $date = Carbon::now();
+        }
+        
+        $date = $date->setTime(0, 0, 0);
+        
+        return $date;
     }
 }

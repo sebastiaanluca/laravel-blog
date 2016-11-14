@@ -15,7 +15,7 @@ class CreateBlogPostsTable extends Migration
             $table->string('slug', 180)->unique()->index();
             
             $table->softDeletes();
-            $table->timestamp('published_at')->nullable();
+            $table->timestamp('published_at');
             $table->boolean('is_draft')->default(true);
             
             $table->string('title', 180);
