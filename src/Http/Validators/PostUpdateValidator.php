@@ -15,10 +15,10 @@ class PostUpdateValidator extends Validator
     public function rules() : array
     {
         return [
-            'title' => 'required|string|max:180',
-            'slug' => ['required', 'string', 'alpha_dash','max:180', Rule::unique('blog_posts')->where('deleted_at', 'NULL')->ignore($this->post)],
-            'body' => 'required|string|max:4194303',
-            'is_draft' => 'required|boolean',
+            'title' => 'string|max:180',
+            'slug' => ['string', 'alpha_dash','max:180', Rule::unique('blog_posts')->where('deleted_at', 'NULL')->ignore($this->post)],
+            'body' => 'string|max:4194303',
+            'is_draft' => 'boolean',
             'published_at' => 'date_format:d/m/Y',
         ];
     }

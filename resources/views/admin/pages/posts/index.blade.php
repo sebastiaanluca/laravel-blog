@@ -34,7 +34,12 @@
                                     <h6 class="dropdown-header">Options</h6>
                                     <a class="dropdown-item" href="#">View</a>
                                     <a class="dropdown-item" href="{{ route('blog::admin.posts.edit', $post->id) }}">Edit</a>
-                                    <a class="dropdown-item" href="#">@if($post->is_draft) Publish @else Mark as draft @endif</a>
+                                    
+                                    {!! Form::open(['route' => ['blog::admin.posts.update', $post->id]]) !!}
+                                    {{ method_field('PUT') }}
+                                    {!! Form::hidden('is_draft', (int)! $post->is_draft) !!}
+                                    <button type="submit" class="dropdown-item">@if($post->is_draft) Publish @else Mark as draft @endif</button>
+                                    {!! Form::close() !!}
                                 </div>
                             </div>
                         

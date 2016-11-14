@@ -59,8 +59,8 @@ class PostController extends Controller
     public function store(PostStoreValidator $validator) : RedirectResponse
     {
         $input = $validator->valid();
-        $input['intro'] = $this->getIntroBlock($input['body']);
-        $input['published_at'] = $this->getPublishedAtDate($input['published_at']);
+        $input = array_merge($input, $this->addIntroToInput($input));
+        $input = array_merge($input, $this->addPublishDateToInput($input));
         
         $this->posts->create($input);
         
@@ -105,13 +105,13 @@ class PostController extends Controller
      */
     public function update(PostUpdateValidator $validator, string $id) : RedirectResponse
     {
-        // TODO: refactor to use repository (with exception throwing instead of returning a boolean)
         $post = $this->posts->findOrFail($id);
         
         $input = $validator->valid();
-        $input['intro'] = $this->getIntroBlock($input['body']);
-        $input['published_at'] = $this->getPublishedAtDate($input['published_at']);
+        $input = array_merge($input, $this->addIntroToInput($input));
+        $input = array_merge($input, $this->addPublishDateToInput($input));
         
+        // TODO: refactor to use repository (with exception throwing instead of returning a boolean)
         $post->update($input);
         
         return redirect()->route('blog::admin.posts.index');
@@ -134,35 +134,49 @@ class PostController extends Controller
     /**
      * Get a post's intro block from its body.
      *
-     * @param string $body
+     * @param array $input
      * @param string $mark
      *
-     * @return string|null
+     * @return array
      */
-    protected function getIntroBlock($body, $mark = '[endintro]')
+    protected function addIntroToInput(array $input, string $mark = '[endintro]') : array
     {
+        $body = array_get($input, 'body');
+        
+        // Handle no input
+        if (! $body) {
+            return [];
+        }
+        
         $intro = trim(strstr($body, $mark, true));
         
         if (! $intro) {
-            return null;
+            return [];
         }
         
-        return $intro;
+        return compact('intro');
     }
     
     /**
      * Get a valid publish date.
      *
-     * @param string $date
+     * @param array $input
      *
-     * @return string
+     * @return array
      */
-    protected function getPublishedAtDate(string $date) : string
+    protected function addPublishDateToInput(array $input) : array
     {
-        $date = ! $date ? Carbon::now() : Carbon::createFromFormat('d/m/Y', $date);
+        $date = array_get($input, 'published_at');
+        
+        // Handle no input
+        if (is_null($date)) {
+            return [];
+        }
+        
+        $date = $date ? Carbon::createFromFormat('d/m/Y', $date) : Carbon::now();
         
         $date = $date->setTime(0, 0, 0);
         
-        return $date;
+        return ['published_at' => $date];
     }
 }
