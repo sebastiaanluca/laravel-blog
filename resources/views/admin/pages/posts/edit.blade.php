@@ -13,7 +13,7 @@
                 <h2>{{ $post->title }}</h2>
                 
                 <div class="margin-top-lg">
-                    {!! Form::model($post, ['route' => ['admin.posts.update', $post->id]]) !!}
+                    {!! Form::model($post, ['route' => ['blog::admin.posts.update', $post->id]]) !!}
     
                     {{ method_field('PUT') }}
                     
@@ -63,7 +63,7 @@
                         {!! Html::error('body') !!}
                     </div>
                     
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary btn-submit">Save changes</button>
                     
                     {!! Form::close() !!}
                 </div>

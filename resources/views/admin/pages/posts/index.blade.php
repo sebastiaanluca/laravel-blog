@@ -33,7 +33,7 @@
                                 <div class="dropdown-menu">
                                     <h6 class="dropdown-header">Options</h6>
                                     <a class="dropdown-item" href="#">View</a>
-                                    <a class="dropdown-item" href="{{ route('admin.posts.edit', $post->id) }}">Edit</a>
+                                    <a class="dropdown-item" href="{{ route('blog::admin.posts.edit', $post->id) }}">Edit</a>
                                     <a class="dropdown-item" href="#">@if($post->is_draft) Publish @else Mark as draft @endif</a>
                                 </div>
                             </div>

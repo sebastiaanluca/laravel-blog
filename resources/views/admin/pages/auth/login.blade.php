@@ -32,7 +32,7 @@
                             {!! Form::password('password', ['id' => 'password', 'class' => 'form-control', 'required', 'placeholder' => 'Your password', 'required']) !!}
                         </div>
                         
-                        <button type="submit" class="btn btn-primary">Log in</button>
+                        <button type="submit" class="btn btn-primary btn-submit">Log in</button>
                         
                         {!! Form::close() !!}
                     </div>

@@ -13,7 +13,7 @@
                 <h2>New post</h2>
                 
                 <div class="margin-top-lg">
-                    {!! Form::open(['route' => ['admin.posts.store']]) !!}
+                    {!! Form::open(['route' => ['blog::admin.posts.store']]) !!}
                     
                     @if (count($errors) > 0)
                         <div class="alert alert-danger">
@@ -62,7 +62,7 @@
                         {!! Html::error('body') !!}
                     </div>
                     
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary btn-submit">Save changes</button>
                     
                     {!! Form::close() !!}
                 </div>
