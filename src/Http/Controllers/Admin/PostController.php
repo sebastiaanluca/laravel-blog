@@ -59,7 +59,7 @@ class PostController extends Controller
     public function store(PostStoreValidator $validator) : RedirectResponse
     {
         $input = $validator->valid();
-        $input = array_merge($input, $this->getIntroBlock($input['body']));
+        $input['intro'] = $this->getIntroBlock($input['body']);
         $input['published_at'] = $this->getPublishedAtDate($input['published_at']);
         
         $this->posts->create($input);
@@ -109,8 +109,7 @@ class PostController extends Controller
         $post = $this->posts->findOrFail($id);
         
         $input = $validator->valid();
-        $input = array_merge($input, $this->getIntroBlock($input['body']));
-        
+        $input['intro'] = $this->getIntroBlock($input['body']);
         $input['published_at'] = $this->getPublishedAtDate($input['published_at']);
         
         $post->update($input);
@@ -138,17 +137,17 @@ class PostController extends Controller
      * @param string $body
      * @param string $mark
      *
-     * @return array
+     * @return string|null
      */
     protected function getIntroBlock($body, $mark = '[endintro]')
     {
         $intro = trim(strstr($body, $mark, true));
         
-        if (strlen($intro) === 0) {
-            return [];
+        if (! $intro) {
+            return null;
         }
         
-        return compact('intro');
+        return $intro;
     }
     
     /**
