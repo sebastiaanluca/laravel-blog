@@ -64,7 +64,7 @@ class PostController extends Controller
         
         $this->posts->create($input);
         
-        return redirect()->route('admin.posts.index');
+        return redirect()->route('blog::admin.posts.index');
     }
     
     /**
@@ -115,7 +115,7 @@ class PostController extends Controller
         
         $post->update($input);
         
-        return redirect()->route('admin.posts.index');
+        return redirect()->route('blog::admin.posts.index');
     }
     
     /**
@@ -129,7 +129,7 @@ class PostController extends Controller
     {
         $this->posts->delete($id);
         
-        return redirect()->route('admin.posts.index');
+        return redirect()->route('blog::admin.posts.index');
     }
     
     /**
