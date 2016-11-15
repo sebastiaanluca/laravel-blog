@@ -2,6 +2,7 @@
 
 namespace SebastiaanLuca\Blog\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -40,4 +41,28 @@ class Post extends Model
     protected $dates = [
         'published_at',
     ];
+    
+    /**
+     * Scope a query to only include published posts.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePublished($query)
+    {
+        return $query->where('is_draft', false)->where('published_at', '<=', Carbon::now());
+    }
+    
+    /**
+     * Scope a query to order in reverse chronological order.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOrderChronologically($query)
+    {
+        return $query->orderBy('published_at', 'DESC');
+    }
 }
