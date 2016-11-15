@@ -48,7 +48,6 @@ class BlogServiceProvider extends PackageServiceProvider
     protected function mapRoutes()
     {
         app(AdminRouter::class);
-        app(PublicRouter::class);
     }
     
     /**
