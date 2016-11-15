@@ -23,6 +23,17 @@ $ composer require sebastiaanluca/laravel-blog
 - At least one active user
 - Publish assets, etc
 
+```
+SebastiaanLuca\Router\RouterServiceProvider::class, + instructions on how to extend kernel
+SebastiaanLuca\Helpers\Html\HtmlServiceProvider::class,
+GrahamCampbell\Markdown\MarkdownServiceProvider::class,
+```
+
+```
+'Form' => Collective\Html\FormFacade::class,
+'Html' => Collective\Html\HtmlFacade::class,
+```
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
