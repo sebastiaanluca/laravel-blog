@@ -47,8 +47,8 @@
                             <div class="form-group {{ Html::highlightOnError('is_draft') }}">
                                 <label for="is_draft" class="form-control-label">Draft</label>
                                 <div class="onoffswitch onoffswitch-form-control">
-                                    {!! Form::hidden('is_draft', false) !!}
-                                    {!! Form::checkbox('is_draft', true, true, ['id' => 'is_draft', 'class' => 'onoffswitch-checkbox']) !!}
+                                    {!! Form::hidden('is_draft', 0) !!}
+                                    {!! Form::checkbox('is_draft', 1, true, ['id' => 'is_draft', 'class' => 'onoffswitch-checkbox']) !!}
                                     <label for="is_draft" class="onoffswitch-label"></label>
                                 </div>
                             </div>

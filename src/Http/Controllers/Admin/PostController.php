@@ -126,7 +126,7 @@ class PostController extends Controller
      */
     public function destroy(string $id) : RedirectResponse
     {
-        $this->posts->delete($id);
+        $this->posts->destroy($id);
         
         return redirect()->route('blog::admin.posts.index');
     }

@@ -14,7 +14,7 @@
                 
                 <div class="margin-top-lg">
                     {!! Form::model($post, ['route' => ['blog::admin.posts.update', $post->id]]) !!}
-    
+                    
                     {{ method_field('PUT') }}
                     
                     @if (count($errors) > 0)
@@ -62,7 +62,14 @@
                         {!! Html::error('body') !!}
                     </div>
                     
-                    <button type="submit" class="btn btn-primary btn-submit">Save changes</button>
+                    <div class="row flex-items-xs-middle">
+                        <div class="col-md-6">
+                            <a class="text-muted" href="#" title="Delete this post" data-toggle="modal" data-target="#delete-post-modal">Delete&hellip;</a>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-primary btn-submit">Save changes</button>
+                        </div>
+                    </div>
                     
                     {!! Form::close() !!}
                 </div>
@@ -70,5 +77,7 @@
             </div>
         </div>
     </div>
+
+    @include('blog::admin/partials/delete-post-modal')
 
 @stop
