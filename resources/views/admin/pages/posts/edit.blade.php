@@ -58,7 +58,7 @@
                     </div>
                     
                     <div class="form-group {{ Html::highlightOnError('body') }}">
-                        {!! Form::textarea('body', null, ['id' => 'body', 'class' => 'form-control text-editor', 'maxlength' => 16383, 'rows' => 20, 'autofocus', 'data-id' => $post->id]) !!}
+                        <markdown-editor name="body" id="body" class="form-control" maxlength="4194303" rows="12" autosave-id="{{ $post->id }}">{{ old('body') ?? $post->body }}</markdown-editor>
                         {!! Html::error('body') !!}
                     </div>
                     
@@ -77,7 +77,7 @@
             </div>
         </div>
     </div>
-
+    
     @include('blog::admin/partials/delete-post-modal')
 
 @stop

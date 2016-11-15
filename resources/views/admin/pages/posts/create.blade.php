@@ -25,7 +25,7 @@
                         <div class="col-md">
                             <div class="form-group {{ Html::highlightOnError('title') }}">
                                 <label for="title" class="form-control-label">Title</label>
-                                {!! Form::text('title', null, ['id' => 'title', 'class' => 'form-control', 'maxlength' => 80, 'required']) !!}
+                                {!! Form::text('title', null, ['id' => 'title', 'class' => 'form-control', 'maxlength' => 80, 'required', 'autofocus']) !!}
                                 {!! Html::error('title') !!}
                             </div>
                         </div>
@@ -56,8 +56,7 @@
                     </div>
                     
                     <div class="form-group {{ Html::highlightOnError('body') }}">
-                        {!! Form::textarea('body', null, ['id' => 'body', 'class' => 'form-control text-editor', 'maxlength' => 16383, 'rows' => 20, 'autofocus', 'data-id' => 0]) !!}
-                        {{--<markdown-editor class="form-control"></markdown-editor>--}}
+                        <markdown-editor name="body" id="body" class="form-control" maxlength="4194303" rows="12" autosave-id="0">{{ old('body') }}</markdown-editor>
                         {!! Html::error('body') !!}
                     </div>
                     
