@@ -13,13 +13,20 @@ class PostService
     protected $posts;
     
     /**
+     * @var \League\CommonMark\Converter
+     */
+    protected $markdown;
+    
+    /**
      * PostService constructor.
      *
      * @param \SebastiaanLuca\Blog\Models\Post $posts
+     * @param \League\CommonMark\Converter $markdown
      */
-    public function __construct(Post $posts)
+    public function __construct(Post $posts, \League\CommonMark\Converter $markdown)
     {
         $this->posts = $posts;
+        $this->markdown = $markdown;
     }
     
     /**
@@ -53,11 +60,12 @@ class PostService
      */
     public function getPublishedPostBySlug(string $slug) : Post
     {
-        // TODO: parse MarkDown
+        // TODO: parse Markdown
         
         $post = $this->posts->published()->where('slug', $slug)->firstOrFail();
         
         $post = $this->removeIntroTagFromPostBody($post);
+        $post = $this->parseBodyMarkdown($post);
         
         return $post;
     }
@@ -72,6 +80,20 @@ class PostService
     protected function removeIntroTagFromPostBody(Post $post) : Post
     {
         $post->body = str_replace('[endintro]', '', $post->body);
+        
+        return $post;
+    }
+    
+    /**
+     * Parse the post's Markdown body.
+     *
+     * @param \SebastiaanLuca\Blog\Models\Post $post
+     *
+     * @return \SebastiaanLuca\Blog\Models\Post
+     */
+    protected function parseBodyMarkdown($post) : Post
+    {
+        $post->body = $this->markdown->convertToHtml($post->body);
         
         return $post;
     }
