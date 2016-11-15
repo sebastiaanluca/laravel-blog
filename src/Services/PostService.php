@@ -65,7 +65,7 @@ class PostService
         $post = $this->posts->published()->where('slug', $slug)->firstOrFail();
         
         $post = $this->removeIntroTagFromPostBody($post);
-        $post = $this->parseBodyMarkdown($post);
+        $post = $this->parseBody($post);
         
         return $post;
     }
@@ -91,7 +91,7 @@ class PostService
      *
      * @return \SebastiaanLuca\Blog\Models\Post
      */
-    protected function parseBodyMarkdown($post) : Post
+    protected function parseBody($post) : Post
     {
         $post->body = $this->markdown->convertToHtml($post->body);
         
