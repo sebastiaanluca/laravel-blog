@@ -44,11 +44,25 @@ class PostService
                 'slug',
                 'title',
                 'intro',
+                'body',
                 'published_at',
             ];
         }
         
-        return $this->posts->published()->orderChronologically()->get($columns);
+        // TODO: override intro with first few chars of body if empty
+        // TODO: parse intro
+        
+        $posts = $this->posts->published()->orderChronologically()->get($columns);
+        
+        $posts = $posts->map(function(Post $post) {
+            if (is_null($post->intro)) {
+                $post->intro = str_limit($post->body, 300);
+            }
+            
+            return $post;
+        });
+        
+        return $posts;
     }
     
     /**
