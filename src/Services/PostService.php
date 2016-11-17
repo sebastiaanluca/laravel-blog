@@ -3,6 +3,7 @@
 namespace SebastiaanLuca\Blog\Services;
 
 use Illuminate\Support\Collection;
+use League\CommonMark\Converter;
 use SebastiaanLuca\Blog\Models\Post;
 
 class PostService
@@ -23,7 +24,7 @@ class PostService
      * @param \SebastiaanLuca\Blog\Models\Post $posts
      * @param \League\CommonMark\Converter $markdown
      */
-    public function __construct(Post $posts, \League\CommonMark\Converter $markdown)
+    public function __construct(Post $posts, Converter $markdown)
     {
         $this->posts = $posts;
         $this->markdown = $markdown;
@@ -39,29 +40,12 @@ class PostService
     public function getPublishedPosts($columns = null) : Collection
     {
         if (is_null($columns)) {
-            $columns = [
-                'id',
-                'slug',
-                'title',
-                'intro',
-                'body',
-                'published_at',
-            ];
+            $columns = $this->getDefaultIndexColumns();
         }
         
         $posts = $this->posts->published()->orderChronologically()->get($columns);
         
-        $posts = $posts->map(function(Post $post) {
-            // Compute intro
-            if (is_null($post->intro)) {
-                $post->intro = str_limit($post->body, 300);
-            }
-            
-            // Parse intro
-            $post->intro = $this->parseMarkdown($post->intro);
-            
-            return $post;
-        });
+        $posts = $this->preparePostIntros($posts);
         
         return $posts;
     }
@@ -81,6 +65,45 @@ class PostService
         $post->body = $this->parseMarkdown($post->body);
         
         return $post;
+    }
+    
+    /**
+     * Get an array of columns to use when retrieving a list of posts for the index.
+     *
+     * @return array
+     */
+    protected function getDefaultIndexColumns() : array
+    {
+        return [
+            'id',
+            'slug',
+            'title',
+            'intro',
+            'body',
+            'published_at',
+        ];
+    }
+    
+    /**
+     * Compute and render the intro of a set of given posts.
+     *
+     * @param \Illuminate\Support\Collection $posts
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    protected function preparePostIntros(Collection $posts) : Collection
+    {
+        return $posts->map(function(Post $post) {
+            // Compute intro
+            if (is_null($post->intro)) {
+                $post->intro = str_limit($post->body, 300);
+            }
+            
+            // Parse intro
+            $post->intro = $this->parseMarkdown($post->intro);
+            
+            return $post;
+        });
     }
     
     /**
