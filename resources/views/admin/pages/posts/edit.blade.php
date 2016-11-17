@@ -58,7 +58,7 @@
                     </div>
                     
                     <div class="form-group {{ Html::highlightOnError('body') }}">
-                        <markdown-editor name="body" id="body" class="form-control" maxlength="4194303" rows="12" autosave-id="{{ $post->id }}">{{ old('body') ?? $post->body }}</markdown-editor>
+                        <markdown-editor name="body" id="body" class="form-control" maxlength="4194303" rows="12">{{ old('body') ?? $post->body }}</markdown-editor>
                         {!! Html::error('body') !!}
                     </div>
                     
