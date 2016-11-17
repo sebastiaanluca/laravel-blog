@@ -145,7 +145,7 @@ const config = {
             Tether: 'tether',
             'window.Tether': 'tether',
             
-            CodeMirror: 'codemirror'
+            CodeMirror: 'codemirror',
         }),
     ],
     resolve: {
