@@ -2,8 +2,6 @@ import SimpleMDE from 'simplemde'
 
 export default {
     mounted: function () {
-        console.log('markdown-editor component loaded')
-        
         this.saveInitialValue()
         this.loadEditor()
         this.loadSaveOptionButtons()

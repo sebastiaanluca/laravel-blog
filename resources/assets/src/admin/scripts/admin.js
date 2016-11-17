@@ -15,8 +15,6 @@ new Vue({
     el: '#blog-admin',
     
     mounted: function () {
-        console.log('admin module loaded')
-        
         this.initPopOvers()
         this.initDateInputFields()
     },

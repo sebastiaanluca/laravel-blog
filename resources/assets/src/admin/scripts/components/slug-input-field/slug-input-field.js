@@ -2,8 +2,6 @@ import slug from 'slug'
 
 export default {
     mounted: function () {
-        console.log('slug-input-field component loaded')
-        
         this.setDefaults()
         this.bindSource()
     },
