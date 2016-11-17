@@ -60,8 +60,6 @@ class PostService
      */
     public function getPublishedPostBySlug(string $slug) : Post
     {
-        // TODO: parse Markdown
-        
         $post = $this->posts->published()->where('slug', $slug)->firstOrFail();
         
         $post = $this->removeIntroTagFromPostBody($post);
