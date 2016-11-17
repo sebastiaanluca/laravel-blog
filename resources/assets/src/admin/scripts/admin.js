@@ -8,15 +8,11 @@ import MarkdownEditor from './components/markdown-editor/markdown-editor.vue'
 
 //
 
+Vue.component('SlugInputField', SlugInputField)
+Vue.component('MarkdownEditor', MarkdownEditor)
+
 new Vue({
-    // TODO: remove
     el: '#blog-admin',
-    
-    // TODO: register as global components
-    components: {
-        SlugInputField,
-        MarkdownEditor,
-    },
     
     mounted: function () {
         console.log('admin module loaded')
