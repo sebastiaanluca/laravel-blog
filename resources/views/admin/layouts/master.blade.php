@@ -23,7 +23,8 @@
 <body class="@yield('bodyClass')">
     @include('blog::admin/partials/navigation')
     
-    <div id="blog-admin">
+    {{--Use the `v-pre` directive to ignore all curly braces (possibly provided by users) in this block--}}
+    <div id="blog-admin" v-pre>
         @yield('content')
     </div>
     
