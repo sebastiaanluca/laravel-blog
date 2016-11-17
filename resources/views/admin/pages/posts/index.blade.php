@@ -31,8 +31,8 @@
                                 <button class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-gear"></span></button>
                                 <div class="dropdown-menu">
                                     <h6 class="dropdown-header">Options</h6>
-                                    <a class="dropdown-item" href="#">View</a>
-                                    <a class="dropdown-item" href="{{ route('blog::admin.posts.edit', $post->id) }}">Edit</a>
+                                    <a class="dropdown-item" href="{{ config('blog.public_post_base_url') . '/' . $post->slug }}" title="View the live post on your blog">View</a>
+                                    <a class="dropdown-item" href="{{ route('blog::admin.posts.edit', $post->id) }}" title="Edit this post">Edit</a>
                                     
                                     {!! Form::open(['route' => ['blog::admin.posts.update', $post->id]]) !!}
                                     {{ method_field('PUT') }}
