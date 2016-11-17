@@ -19,7 +19,7 @@ class PostStoreValidator extends Validator
             'slug' => ['required', 'string', 'alpha_dash', 'max:180', Rule::unique('blog_posts')->where('deleted_at', 'NULL')],
             'body' => 'required|string|max:4194303',
             'is_draft' => 'required|boolean',
-            'published_at' => 'date_format:d/m/Y',
+            'published_at' => 'required|date_format:d/m/Y',
         ];
     }
 }

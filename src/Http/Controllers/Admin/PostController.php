@@ -145,13 +145,13 @@ class PostController extends Controller
         
         // Handle no input
         if (! $body) {
-            return [];
+            return ['intro' => null];
         }
         
         $intro = trim(strstr($body, $mark, true));
         
         if (! $intro) {
-            return [];
+            return ['intro' => null];
         }
         
         return compact('intro');
@@ -168,13 +168,18 @@ class PostController extends Controller
     {
         $date = array_get($input, 'published_at');
         
-        // Handle no input
+        // Null means there was no date input (as opposed to
+        // an empty string which means an empty field), so we
+        // don't have to handle the publish date at all.
         if (is_null($date)) {
             return [];
         }
         
+        // Now if there was user input, but it's just empty,
+        // we need to use a standard value.
         $date = $date ? Carbon::createFromFormat('d/m/Y', $date) : Carbon::now();
         
+        // We're not handling times, just dates
         $date = $date->setTime(0, 0, 0);
         
         return ['published_at' => $date];
