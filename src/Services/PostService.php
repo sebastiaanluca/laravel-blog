@@ -49,15 +49,16 @@ class PostService
             ];
         }
         
-        // TODO: override intro with first few chars of body if empty
-        // TODO: parse intro
-        
         $posts = $this->posts->published()->orderChronologically()->get($columns);
         
         $posts = $posts->map(function(Post $post) {
+            // Compute intro
             if (is_null($post->intro)) {
                 $post->intro = str_limit($post->body, 300);
             }
+            
+            // Parse intro
+            $post->intro = $this->parseMarkdown($post->intro);
             
             return $post;
         });
@@ -77,7 +78,7 @@ class PostService
         $post = $this->posts->published()->where('slug', $slug)->firstOrFail();
         
         $post = $this->removeIntroTagFromPostBody($post);
-        $post = $this->parseBody($post);
+        $post->body = $this->parseMarkdown($post->body);
         
         return $post;
     }
@@ -99,14 +100,12 @@ class PostService
     /**
      * Parse the post's Markdown body.
      *
-     * @param \SebastiaanLuca\Blog\Models\Post $post
+     * @param string $content
      *
-     * @return \SebastiaanLuca\Blog\Models\Post
+     * @return string
      */
-    protected function parseBody($post) : Post
+    protected function parseMarkdown(string $content) : string
     {
-        $post->body = $this->markdown->convertToHtml($post->body);
-        
-        return $post;
+        return $this->markdown->convertToHtml($content);
     }
 }
