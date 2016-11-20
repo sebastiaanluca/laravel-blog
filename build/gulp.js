@@ -15,6 +15,12 @@ gulp.task('default', callback => {
     runSequence('clean', 'webpack', callback)
 })
 
+gulp.task('production', callback => {
+    process.env.APP_ENV = 'production'
+    
+    runSequence('clean', 'webpack', callback)
+})
+
 gulp.task('hot', callback => {
     runSequence('clean', 'webpack', 'webpack-dev-server', callback)
 })
@@ -26,7 +32,13 @@ gulp.task('serve', callback => {
 /* Individual tasks */
 
 gulp.task('clean', function () {
-    return del(['public/vendor/blog'])
+    let directories = ['public/vendor/blog']
+    
+    if (process.env.APP_ENV === 'production') {
+        directories = ['resources/assets/dist']
+    }
+    
+    return del(directories)
 })
 
 gulp.task('webpack', callback => {

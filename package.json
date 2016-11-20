@@ -61,8 +61,10 @@
   "main": "gulpfile.js",
   "directories": {},
   "scripts": {
+    "symlink-public-dir": "ln -nfs ./../../../public/ ./public/",
     "gulp": "gulp",
     "build": "gulp",
+    "production": "gulp production",
     "hot": "gulp hot",
     "serve": "gulp serve"
   }

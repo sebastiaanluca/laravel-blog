@@ -9,13 +9,12 @@ const defaultFilename = isProduction ? '[name]-[hash]' : '[name]'
 const styleParser = new ExtractTextPlugin(`styles/${defaultFilename}.css`)
 
 const config = {
-    devtool: 'cheap-module-eval-source-map',
+    devtool: isProduction ? false : 'cheap-module-eval-source-map',
     entry: {
-        //        blog: ['./resources/assets/scripts/src/public/public.js'],
         'blog-admin': ['./resources/assets/src/admin/scripts/admin.js'],
     },
     output: {
-        path: path.resolve(process.cwd(), 'public/vendor/blog'),
+        path: path.resolve(process.cwd(), isProduction ? 'resources/assets/dist' : 'public/vendor/blog'),
         filename: `scripts/${defaultFilename}.js`,
         publicPath: '/vendor/blog/',
     },
