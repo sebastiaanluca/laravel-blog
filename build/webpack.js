@@ -54,7 +54,7 @@ const config = {
             {
                 // Compile CSS and SASS stylesheets with sourcemaps enabled
                 test: /\.s?css$/i,
-                loader: styleParser.extract(['css?sourceMap!postcss!sass?sourceMap']),
+                loader: styleParser.extract(['css?!postcss!sass?sourceMap']),
             },
             
             {
@@ -136,29 +136,29 @@ const config = {
         new ManifestPlugin({
             fileName: 'rev-manifest.json'
         }),
-        
-        // Compile CSS
-        styleParser,
-        
-        new webpack.optimize.CommonsChunkPlugin('vendor', isProduction ? 'scripts/vendor-[hash].js' : 'scripts/vendor.js'),
-        
-        // Find duplicate dependencies & prevents duplicate inclusion
-        new webpack.optimize.DedupePlugin(),
-        
+    
         // Provide global support for vendor libraries
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
             'window.jQuery': 'jquery',
-            
+        
             _: 'lodash',
-            
+        
             tether: 'tether',
             Tether: 'tether',
             'window.Tether': 'tether',
-            
+        
             CodeMirror: 'codemirror',
         }),
+        
+        // Find duplicate dependencies & prevents duplicate inclusion
+        new webpack.optimize.DedupePlugin(),
+        
+        new webpack.optimize.CommonsChunkPlugin('vendor', isProduction ? 'scripts/vendor-[hash].js' : 'scripts/vendor.js'),
+        
+        // Compile CSS
+        styleParser,
     ],
     resolve: {
         alias: {
