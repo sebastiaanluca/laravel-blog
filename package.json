@@ -1,6 +1,6 @@
 {
-  "name": "laravel-skeleton",
-  "description": "-",
+  "name": "laravel-blog",
+  "description": "A simple-to-use blog system you can pull into any existing Laravel project and immediately get writing.",
   "version": "0.1.0",
   "keywords": [],
   "author": "Sebastiaan Luca <hello@sebastiaanluca.com>",
