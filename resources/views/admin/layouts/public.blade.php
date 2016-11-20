@@ -28,6 +28,7 @@
     {{-- Scripts --}}
     {{--TODO--}}
     {{--<script src="{{ elixir('vendors.js', 'assets/vendor/blog') }}" defer></script>--}}
+    <script src="{{ elixir('vendor.js', 'vendor/blog') }}" defer></script>
     <script src="{{ elixir('blog-admin.js', 'vendor/blog') }}" defer></script>
     @yield('scripts')
 </body>

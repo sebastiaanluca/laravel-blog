@@ -1,5 +1,6 @@
 {
-  "blog-admin.js": "scripts/blog-admin-be2ea008ba27c839a484.js",
-  "blog-admin.css": "styles/blog-admin-be2ea008ba27c839a484.css",
+  "vendor.js": "scripts/vendor-0f29398ad7cfb62d61b8.js",
+  "blog-admin.js": "scripts/blog-admin-0f29398ad7cfb62d61b8.js",
+  "blog-admin.css": "styles/blog-admin-0f29398ad7cfb62d61b8.css",
   "fonts/fontawesome-webfont/d7c639084f684d66a1bc66855d193ed8.svg": "fonts/fontawesome-webfont/d7c639084f684d66a1bc66855d193ed8.svg"
 }

@@ -2,15 +2,23 @@ const path = require('path')
 const webpack = require('webpack')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const _ = require('lodash')
 
 const isProduction = process.env.APP_ENV === 'production'
 const defaultFilename = isProduction ? '[name]-[hash]' : '[name]'
 
 const styleParser = new ExtractTextPlugin(`styles/${defaultFilename}.css`)
 
+// Get a list of third-party vendors directly from our dependencies list
+const packageConfig = require(path.resolve(process.cwd(), './package.json'))
+let packages = _.keys(packageConfig.dependencies)
+// Remove some vendors that don't have any JS files 
+packages = _.pullAll(packages, ['font-awesome'])
+
 const config = {
     devtool: isProduction ? false : 'cheap-module-eval-source-map',
     entry: {
+        'vendor': packages,
         'blog-admin': ['./resources/assets/src/admin/scripts/admin.js'],
     },
     output: {
@@ -119,7 +127,10 @@ const config = {
         
         // Set our environment variables
         new webpack.DefinePlugin({
-            'process.env.APP_ENV': JSON.stringify(process.env.APP_ENV),
+            'process.env': {
+                'APP_ENV': JSON.stringify(process.env.APP_ENV),
+                'NODE_ENV': JSON.stringify(process.env.APP_ENV),
+            }
         }),
         
         new ManifestPlugin({
@@ -128,6 +139,8 @@ const config = {
         
         // Compile CSS
         styleParser,
+        
+        new webpack.optimize.CommonsChunkPlugin('vendor', isProduction ? 'scripts/vendor-[hash].js' : 'scripts/vendor.js'),
         
         // Find duplicate dependencies & prevents duplicate inclusion
         new webpack.optimize.DedupePlugin(),
