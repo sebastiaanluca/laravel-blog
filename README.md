@@ -23,15 +23,19 @@ $ composer require sebastiaanluca/laravel-blog
 - At least one active user
 - Publish assets, etc
 
-```
+```php
 SebastiaanLuca\Router\RouterServiceProvider::class, + instructions on how to extend kernel
 SebastiaanLuca\Helpers\Html\HtmlServiceProvider::class,
 GrahamCampbell\Markdown\MarkdownServiceProvider::class,
 ```
 
-```
+```php
 'Form' => Collective\Html\FormFacade::class,
 'Html' => Collective\Html\HtmlFacade::class,
+```
+
+```bash
+php artisan vendor:publish --tag=assets --provider="SebastiaanLuca\Blog\Providers\BlogServiceProvider"
 ```
 
 ## Change log

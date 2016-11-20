@@ -9,7 +9,6 @@ use SebastiaanLuca\Blog\Http\Composers\NavigationComposer;
 use SebastiaanLuca\Blog\Http\Middleware\RedirectIfAuthenticated;
 use SebastiaanLuca\Blog\Http\Middleware\RedirectIfGuest;
 use SebastiaanLuca\Blog\Http\Routers\AdminRouter;
-use SebastiaanLuca\Blog\Http\Routers\PublicRouter;
 
 class BlogServiceProvider extends PackageServiceProvider
 {
@@ -28,6 +27,18 @@ class BlogServiceProvider extends PackageServiceProvider
         parent::boot();
         
         $this->registerViewComposers();
+    }
+    
+    /**
+     * Register all publishable module assets.
+     */
+    protected function registerPublishableResources()
+    {
+        parent::registerPublishableResources();
+        
+        $this->publishes([
+            $this->getPackageDirectory() . '/resources/assets/src' => resource_path("assets/vendor/{$this->package}"),
+        ], 'source');
     }
     
     /**
