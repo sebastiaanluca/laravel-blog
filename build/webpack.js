@@ -136,19 +136,19 @@ const config = {
         new ManifestPlugin({
             fileName: 'rev-manifest.json'
         }),
-    
+        
         // Provide global support for vendor libraries
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
             'window.jQuery': 'jquery',
-        
+            
             _: 'lodash',
-        
+            
             tether: 'tether',
             Tether: 'tether',
             'window.Tether': 'tether',
-        
+            
             CodeMirror: 'codemirror',
         }),
         
