@@ -20,8 +20,8 @@
     "require": {
         "php": "^7.0",
         "graham-campbell/markdown": "^7.0",
-        "illuminate/support": "~5.1",
-        "laravelcollective/html": "~5.3.0",
+        "illuminate/support": "^5.1",
+        "laravelcollective/html": "^5.3",
         "nesbot/carbon": "^1.21",
         "rinvex/repository": "dev-feature/add-entities as 2.0.1",
         "sebastiaanluca/laravel-helpers": "dev-develop",
