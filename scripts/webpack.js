@@ -134,6 +134,11 @@ const config = {
             
             CodeMirror: 'codemirror',
         }),
+    
+        // Exclude unicode table from slug package
+        // See https://github.com/dodo/node-slug (at the bottom)
+        // See https://github.com/dodo/node-slug/issues/62
+        new webpack.IgnorePlugin(/unicode\/category\/So/),
         
         // This plugin looks for similar chunks and files and only
         // includes them once (and provides copies when used)
