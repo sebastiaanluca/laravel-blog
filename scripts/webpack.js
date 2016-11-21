@@ -20,7 +20,7 @@ const config = {
     
     entry: {
         'blog-admin': ['./resources/assets/src/admin/scripts/admin.js'],
-        // Vendors will be added later dyanamically
+        // Vendors will be added later dynamically
     },
     
     output: {
