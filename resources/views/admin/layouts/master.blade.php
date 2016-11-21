@@ -14,7 +14,7 @@
     </title>
     
     {{-- Styles--}}
-    <link href="{{ elixir('vendor.css', 'assets') }}" rel="stylesheet" type="text/css">
+    <link href="{{ elixir('vendor.css', 'vendor/blog') }}" rel="stylesheet" type="text/css">
     <link href="{{ elixir('blog-admin.css', 'vendor/blog') }}" rel="stylesheet" type="text/css">
     @yield('styles')
 </head>
