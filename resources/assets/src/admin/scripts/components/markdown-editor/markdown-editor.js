@@ -1,4 +1,3 @@
-// TODO: optimize (~300KB now)
 import SimpleMDE from 'simplemde'
 
 export default {
