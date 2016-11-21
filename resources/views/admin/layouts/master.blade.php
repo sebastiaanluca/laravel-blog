@@ -14,8 +14,7 @@
     </title>
     
     {{-- Styles--}}
-    {{-- TODO: vendors.css --}}
-    {{--<link href="{{ elixir('vendors.css', 'assets') }}" rel="stylesheet" type="text/css">--}}
+    <link href="{{ elixir('vendor.css', 'assets') }}" rel="stylesheet" type="text/css">
     <link href="{{ elixir('blog-admin.css', 'vendor/blog') }}" rel="stylesheet" type="text/css">
     @yield('styles')
 </head>
@@ -31,8 +30,6 @@
     @include('blog::admin/partials/footer')
     
     {{-- Scripts --}}
-    {{--TODO--}}
-    {{--<script src="{{ elixir('vendors.js', 'assets/vendor/blog') }}" defer></script>--}}
     <script src="{{ elixir('vendor.js', 'vendor/blog') }}" defer></script>
     <script src="{{ elixir('blog-admin.js', 'vendor/blog') }}" defer></script>
     @yield('scripts')

@@ -1,31 +1,40 @@
+const Helpers = require('./helpers')
 const path = require('path')
+const _ = require('lodash')
+
 const webpack = require('webpack')
+const autoprefixer = require('autoprefixer')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const _ = require('lodash')
 
 const isProduction = process.env.APP_ENV === 'production'
 const defaultFilename = isProduction ? '[name]-[hash]' : '[name]'
+const target = isProduction ? 'resources/assets/dist' : 'public/vendor/blog'
 
 const styleParser = new ExtractTextPlugin(`styles/${defaultFilename}.css`)
 
-// Get a list of third-party vendors directly from our dependencies list
-const packageConfig = require(path.resolve(process.cwd(), './package.json'))
-let packages = _.keys(packageConfig.dependencies)
-// Remove some vendors that don't have any JS files 
-packages = _.pullAll(packages, ['font-awesome'])
-
 const config = {
+    
+    // Sourcemaps, etc.
     devtool: isProduction ? false : 'cheap-module-eval-source-map',
+    
     entry: {
-        'vendor': packages,
         'blog-admin': ['./resources/assets/src/admin/scripts/admin.js'],
+        // Vendors will be added later dyanamically
     },
+    
     output: {
-        path: path.resolve(process.cwd(), isProduction ? 'resources/assets/dist' : 'public/vendor/blog'),
+        // An absolute path to the desired output directory
+        path: path.resolve(process.cwd(), target),
+        
+        // A filename pattern for the output files. This would create 
+        // `global.js` and `portfolio.js`
         filename: `scripts/${defaultFilename}.js`,
+        
+        // Used to define the root path of the publicly accessible assets
         publicPath: '/vendor/blog/',
     },
+    
     module: {
         loaders: [
             {
@@ -54,14 +63,14 @@ const config = {
             {
                 // Compile CSS and SASS stylesheets with sourcemaps enabled
                 test: /\.s?css$/i,
-                loader: styleParser.extract(['css?!postcss!sass?sourceMap']),
+                loader: styleParser.extract(['css?-autoprefixer?sourceMap!postcss!sass?-autoprefixer?sourceMap']),
             },
             
             {
                 // Optimize images
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 loaders: [
-                    `file?name=[path]${defaultFilename}.[ext]&context=./resources/`,
+                    'file?name=[path][name].[ext]&manipulateImageContext',
                     'image-webpack'
                 ]
             },
@@ -89,6 +98,89 @@ const config = {
             },
         ],
     },
+    
+    plugins: [
+        // Set our environment variables
+        new webpack.DefinePlugin({
+            'process.env': {
+                'APP_ENV': JSON.stringify(process.env.APP_ENV),
+                'NODE_ENV': JSON.stringify(process.env.APP_ENV),
+            }
+        }),
+        
+        // Log start of compiling
+        function () {
+            this.plugin('watch-run', function (watching, callback) {
+                console.log('Beginning compile at ' + new Date())
+                callback()
+            })
+        },
+        
+        new ManifestPlugin({
+            fileName: 'rev-manifest.json'
+        }),
+        
+        // Provide global support for vendor libraries
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery',
+            
+            _: 'lodash',
+            
+            tether: 'tether',
+            Tether: 'tether',
+            'window.Tether': 'tether',
+            
+            CodeMirror: 'codemirror',
+        }),
+        
+        // This plugin looks for similar chunks and files and only
+        // includes them once (and provides copies when used)
+        new webpack.optimize.DedupePlugin(),
+        
+        // Split vendor resources from application code.
+        // Only takes in account elements (JS, CSS, images) included in JS files,
+        // not SASS files for instance (separate loader, no support yet).
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            minChunks: (module) => Helpers.isExternalModule(module)
+        }),
+        
+        // Extract styles from scripts
+        styleParser,
+    ],
+    
+    resolve: {
+        // Resolve modules from these directories. Allows to use 
+        // vendor/module instead of referencing relatively (../../../)
+        modulesDirectories: ['node_modules', 'modules'],
+        
+        // Only look for these types of files though
+        extensions: ['', '.js', '.css', '.scss'],
+        
+        alias: {
+            // Force all modules to use the same jquery version
+            // See https://github.com/Eonasdan/bootstrap-datetimepicker/issues/1319#issuecomment-208339466
+            'jquery': path.resolve(process.cwd(), 'node_modules/jquery/src/jquery'),
+            
+            // Use runtime Vue version
+            'vue$': path.resolve(process.cwd(), 'node_modules/vue/dist/vue.js'),
+        }
+    },
+    
+    // Parses file loaders (only file-loader?) name string and enables you
+    // to replace elements within it. Used here to provide a context to 
+    // image-webpack-loader and prevent images being placed in 
+    // e.g. public/assets/modules/theme/resources/images
+    customInterpolateName: function (url, name, options) {
+        if (this.query.indexOf('manipulateImageContext') !== -1) {
+            url = url.substring(url.indexOf('images'))
+        }
+        
+        return url
+    },
+    
     // Image optimization settings
     imageWebpackLoader: {
         mozjpeg: {
@@ -116,64 +208,30 @@ const config = {
             ]
         }
     },
-    plugins: [
-        // Log start of compiling
-        function () {
-            this.plugin('watch-run', function (watching, callback) {
-                console.log('Begin compile at ' + new Date())
-                callback()
-            })
-        },
-        
-        // Set our environment variables
-        new webpack.DefinePlugin({
-            'process.env': {
-                'APP_ENV': JSON.stringify(process.env.APP_ENV),
-                'NODE_ENV': JSON.stringify(process.env.APP_ENV),
-            }
-        }),
-        
-        new ManifestPlugin({
-            fileName: 'rev-manifest.json'
-        }),
-        
-        // Provide global support for vendor libraries
-        new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery',
-            'window.jQuery': 'jquery',
-            
-            _: 'lodash',
-            
-            tether: 'tether',
-            Tether: 'tether',
-            'window.Tether': 'tether',
-            
-            CodeMirror: 'codemirror',
-        }),
-        
-        // Find duplicate dependencies & prevents duplicate inclusion
-        new webpack.optimize.DedupePlugin(),
-        
-        new webpack.optimize.CommonsChunkPlugin('vendor', isProduction ? 'scripts/vendor-[hash].js' : 'scripts/vendor.js'),
-        
-        // Compile CSS
-        styleParser,
-    ],
-    resolve: {
-        alias: {
-            'jquery': path.resolve(process.cwd(), 'node_modules/jquery/src/jquery'),
-            'vue$': path.resolve(process.cwd(), 'node_modules/vue/dist/vue.js'),
-        }
+    
+    sassLoader: {
+        // An array of paths that LibSass can look in to attempt to resolve your @import declarations
+        includePaths: [
+            path.resolve(process.cwd(), 'modules'),
+            path.resolve(process.cwd(), 'node_modules'),
+        ],
     },
+    
+    postcss() {
+        return [autoprefixer]
+    },
+    
     node: {
         // Fixes SimpleMDE package (see https://github.com/NextStepWebs/simplemde-markdown-editor/issues/150)
         fs: 'empty'
     },
+    
     devServer: {
         port: process.env.SERVE_PORT || 8080,
-        contentBase: 'public/vendor/blog',
+        contentBase: target,
+        // Where to serve the bundled assets from
         publicPath: process.env.SERVE_PROXY_TARGET + '/vendor/blog',
+        // Enable web page updates without reloading
         hot: true,
         https: true,
         
@@ -203,13 +261,6 @@ if (process.env.APP_ENV === 'production') {
         // This plugins optimizes chunks and modules by
         // how much they are used in your app
         new webpack.optimize.OccurenceOrderPlugin(),
-        
-        // This plugin prevents Webpack from creating chunks
-        // that would be too small to be worth loading separately
-        new webpack.optimize.MinChunkSizePlugin({
-            // ~50kb
-            minChunkSize: 51200,
-        }),
         
         new webpack.optimize.UglifyJsPlugin({
             compress: {

@@ -35,6 +35,13 @@ Note: execute all commands in the root of the package.
 require __DIR__.'/../packages/sebastiaanluca/blog/vendor/autoload.php';
 ```
 
+Create a .env file with `SERVE_PROXY_TARGET` in it.
+
+```
+yarn install
+yarn run build
+```
+
 ### Symlink dev build directory
 
 Symlink local dev build dir to `public/vendor/blog`.

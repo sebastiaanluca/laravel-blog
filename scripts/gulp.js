@@ -60,15 +60,15 @@ gulp.task('browsersync', callback => {
         // https://www.browsersync.io/docs/options/#option-server
         proxy: process.env.SERVE_PROXY_TARGET,
         port: process.env.SERVE_PORT || 8080,
-        //        https: true,
-        
+    
+        https: true,
         // Prevent BrowserSync from automatically opening a browser window to the page
         open: false,
     })
     
     // Watch compiled file and template changes and do a full refresh
     gulp.watch('./public/**/*').on('change', browserSync.reload)
-    gulp.watch('./resources/views/**/*').on('change', browserSync.reload);
+    gulp.watch('./resources/views/**/*').on('change', browserSync.reload)
     
     callback()
 })

@@ -64,7 +64,8 @@
     "symlink-public-dir": "ln -nfs ./../../../public/ ./public/",
     "gulp": "gulp",
     "build": "gulp",
-    "production": "gulp production",
+    "prod": "gulp production",
+    "watch": "gulp watch",
     "hot": "gulp hot",
     "serve": "gulp serve"
   }
