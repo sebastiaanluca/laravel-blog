@@ -1,7 +1,7 @@
 {
     "name": "sebastiaanluca/laravel-blog",
     "type": "library",
-    "description": "A simple-to-use blog system you can pull into any existing Laravel project and immediately get writing.",
+    "description": "A simple-to-use blog system you can pull into any existing Laravel project.",
     "keywords": [
         "Laravel",
         "Blog",
@@ -18,32 +18,20 @@
         }
     ],
     "require": {
-        "php": "^7.0",
-        "graham-campbell/markdown": "^7.0",
-        "illuminate/support": "^5.1",
+        "php": "^7",
+        "graham-campbell/markdown": "^7",
+        "illuminate/support": "^5.3",
+        "laravel/framework": "^5.3",
         "laravelcollective/html": "^5.3",
         "nesbot/carbon": "^1.21",
-        "rinvex/repository": "dev-feature/add-entities as 2.0.1",
-        "sebastiaanluca/laravel-helpers": "dev-develop",
-        "sebastiaanluca/laravel-router": "dev-develop as 2.0.0",
-        "sebastiaanluca/laravel-unbreakable-migrations": "dev-develop",
-        "sebastiaanluca/laravel-validator": "dev-develop"
+        "sebastiaanluca/laravel-helpers": "^0.3",
+        "sebastiaanluca/laravel-router": "^2.1.2",
+        "sebastiaanluca/laravel-unbreakable-migrations": "^0.1",
+        "sebastiaanluca/laravel-validator": "^0.1"
     },
     "require-dev": {
-        "nwidart/laravel-modules": "dev-feature/refactor",
-        "phpunit/phpunit": "~4.0||~5.0",
-        "squizlabs/php_codesniffer": "^2.3"
+        "phpunit/phpunit": "^5|^6"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:sebastiaanluca/laravel-modules.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@github.com:sebastiaanluca/repository.git"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "SebastiaanLuca\\Blog\\": "src"
@@ -51,13 +39,16 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "SebastiaanLuca\\Blog\\": "tests"
+            "SebastiaanLuca\\Blog\\Tests\\": "tests"
         }
     },
     "scripts": {
-        "test": "phpunit",
-        "check-style": "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests",
-        "fix-style": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests"
+        "test": "phpunit"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "1.0-dev"
+        }
     },
     "config": {
         "preferred-install": "dist",
