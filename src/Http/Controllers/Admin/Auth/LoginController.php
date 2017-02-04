@@ -15,7 +15,7 @@ class LoginController extends Controller
     use AuthenticatesUsers {
         logout as traitLogout;
     }
-    
+
     /**
      * Get the post register / login redirect path.
      *
@@ -25,7 +25,7 @@ class LoginController extends Controller
     {
         return route('blog::admin.home');
     }
-    
+
     /**
      * Show the login form.
      *
@@ -35,7 +35,7 @@ class LoginController extends Controller
     {
         return view('blog::admin.pages.auth.login');
     }
-    
+
     /**
      * Log the user out of the application.
      *
@@ -46,7 +46,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         $this->traitLogout($request);
-        
+
         return redirect()->route('blog::admin.auth.login');
     }
 }

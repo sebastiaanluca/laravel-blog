@@ -16,7 +16,7 @@ class PostController extends Controller
      * @var \SebastiaanLuca\Blog\Models\Post
      */
     protected $posts;
-    
+
     /**
      * PostController constructor.
      *
@@ -26,7 +26,7 @@ class PostController extends Controller
     {
         $this->posts = $posts;
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -35,10 +35,10 @@ class PostController extends Controller
     public function index() : View
     {
         $posts = $this->posts->orderBy('published_at', 'DESC')->get();
-        
+
         return view('blog::admin/pages/posts/index', compact('posts'));
     }
-    
+
     /**
      * Show the view for creating a new resource.
      *
@@ -48,7 +48,7 @@ class PostController extends Controller
     {
         return view('blog::admin/pages/posts/create');
     }
-    
+
     /**
      * Create a new resource.
      *
@@ -61,12 +61,12 @@ class PostController extends Controller
         $input = $validator->valid();
         $input = array_merge($input, $this->addIntroToInput($input));
         $input = array_merge($input, $this->addPublishDateToInput($input));
-        
+
         $this->posts->create($input);
-        
+
         return redirect()->route('blog::admin.posts.index');
     }
-    
+
     /**
      * View a resource.
      *
@@ -77,10 +77,10 @@ class PostController extends Controller
     public function show(string $id) : View
     {
         $post = $this->posts->findOrFail($id);
-        
+
         return view('blog::admin/pages/posts/show', compact('post'));
     }
-    
+
     /**
      * Show the view for editing the given resource.
      *
@@ -91,10 +91,10 @@ class PostController extends Controller
     public function edit(string $id) : View
     {
         $post = $this->posts->findOrFail($id);
-        
+
         return view('blog::admin/pages/posts/edit', compact('post'));
     }
-    
+
     /**
      * Update the given resource.
      *
@@ -106,17 +106,17 @@ class PostController extends Controller
     public function update(PostUpdateValidator $validator, string $id) : RedirectResponse
     {
         $post = $this->posts->findOrFail($id);
-        
+
         $input = $validator->valid();
         $input = array_merge($input, $this->addIntroToInput($input));
         $input = array_merge($input, $this->addPublishDateToInput($input));
-        
+
         // TODO: refactor to use repository (with exception throwing instead of returning a boolean)
         $post->update($input);
-        
+
         return redirect()->route('blog::admin.posts.index');
     }
-    
+
     /**
      * Delete the given resource.
      *
@@ -127,10 +127,10 @@ class PostController extends Controller
     public function destroy(string $id) : RedirectResponse
     {
         $this->posts->destroy($id);
-        
+
         return redirect()->route('blog::admin.posts.index');
     }
-    
+
     /**
      * Get a post's intro block from its body.
      *
@@ -142,21 +142,21 @@ class PostController extends Controller
     protected function addIntroToInput(array $input, string $mark = '[endintro]') : array
     {
         $body = array_get($input, 'body');
-        
+
         // Handle no input
         if (! $body) {
             return ['intro' => null];
         }
-        
+
         $intro = trim(strstr($body, $mark, true));
-        
+
         if (! $intro) {
             return ['intro' => null];
         }
-        
+
         return compact('intro');
     }
-    
+
     /**
      * Get a valid publish date.
      *
@@ -167,21 +167,21 @@ class PostController extends Controller
     protected function addPublishDateToInput(array $input) : array
     {
         $date = array_get($input, 'published_at');
-        
+
         // Null means there was no date input (as opposed to
         // an empty string which means an empty field), so we
         // don't have to handle the publish date at all.
         if (is_null($date)) {
             return [];
         }
-        
+
         // Now if there was user input, but it's just empty,
         // we need to use a standard value.
         $date = $date ? Carbon::createFromFormat('d/m/Y', $date) : Carbon::now();
-        
+
         // We're not handling times, just dates
         $date = $date->setTime(0, 0, 0);
-        
+
         return ['published_at' => $date];
     }
 }

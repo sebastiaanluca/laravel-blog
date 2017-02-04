@@ -60,7 +60,7 @@ gulp.task('browsersync', callback => {
         // https://www.browsersync.io/docs/options/#option-server
         proxy: process.env.SERVE_PROXY_TARGET,
         port: process.env.SERVE_PORT || 8080,
-    
+        
         https: true,
         // Prevent BrowserSync from automatically opening a browser window to the page
         open: false,

@@ -21,7 +21,7 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check()) {
             return redirect()->route('blog::admin.home');
         }
-        
+
         return $next($request);
     }
 }

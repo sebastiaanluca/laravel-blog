@@ -28,7 +28,9 @@
                             </p>
                             
                             <div class="dropdown d-inline-block float-right">
-                                <button class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-gear"></span></button>
+                                <button class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="fa fa-gear"></span>
+                                </button>
                                 <div class="dropdown-menu">
                                     <h6 class="dropdown-header">Options</h6>
                                     <a class="dropdown-item" href="{{ config('blog.public_post_base_url') . '/' . $post->slug }}" title="View the live post on your blog">View</a>

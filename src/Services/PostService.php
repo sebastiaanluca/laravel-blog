@@ -12,12 +12,12 @@ class PostService
      * @var \SebastiaanLuca\Blog\Models\Post
      */
     protected $posts;
-    
+
     /**
      * @var \League\CommonMark\Converter
      */
     protected $markdown;
-    
+
     /**
      * PostService constructor.
      *
@@ -29,7 +29,7 @@ class PostService
         $this->posts = $posts;
         $this->markdown = $markdown;
     }
-    
+
     /**
      * Get a chronological list of published posts.
      *
@@ -42,14 +42,14 @@ class PostService
         if (is_null($columns)) {
             $columns = $this->getDefaultIndexColumns();
         }
-        
+
         $posts = $this->posts->published()->orderChronologically()->get($columns);
-        
+
         $posts = $this->preparePostIntros($posts);
-        
+
         return $posts;
     }
-    
+
     /**
      * Get a published post by its slug.
      *
@@ -60,13 +60,13 @@ class PostService
     public function getPublishedPostBySlug(string $slug) : Post
     {
         $post = $this->posts->published()->where('slug', $slug)->firstOrFail();
-        
+
         $post = $this->removeIntroTagFromPostBody($post);
         $post->body = $this->parseMarkdown($post->body);
-        
+
         return $post;
     }
-    
+
     /**
      * Get an array of columns to use when retrieving a list of posts for the index.
      *
@@ -83,7 +83,7 @@ class PostService
             'published_at',
         ];
     }
-    
+
     /**
      * Compute and render the intro of a set of given posts.
      *
@@ -93,19 +93,19 @@ class PostService
      */
     protected function preparePostIntros(Collection $posts) : Collection
     {
-        return $posts->map(function(Post $post) {
+        return $posts->map(function (Post $post) {
             // Compute intro
             if (is_null($post->intro)) {
                 $post->intro = str_limit($post->body, 300);
             }
-            
+
             // Parse intro
             $post->intro = $this->parseMarkdown($post->intro);
-            
+
             return $post;
         });
     }
-    
+
     /**
      * Remove the intro tag from the post's body.
      *
@@ -116,10 +116,10 @@ class PostService
     protected function removeIntroTagFromPostBody(Post $post) : Post
     {
         $post->body = str_replace('[endintro]', '', $post->body);
-        
+
         return $post;
     }
-    
+
     /**
      * Parse the post's Markdown body.
      *

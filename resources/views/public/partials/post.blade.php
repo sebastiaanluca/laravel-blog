@@ -1,1 +1,1 @@
- {{--TODO: simple post detail to include in own app--}}
+{{--TODO: simple post detail to include in own app--}}

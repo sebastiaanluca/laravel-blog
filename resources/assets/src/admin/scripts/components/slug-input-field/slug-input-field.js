@@ -20,7 +20,7 @@ export default {
     methods: {
         setDefaults: function () {
             this.value = this.$el.value
-            this.hasManualInput = !!this.$el.value
+            this.hasManualInput = ! ! this.$el.value
         },
         
         bindSource: function () {
@@ -47,10 +47,10 @@ export default {
         onBlur: function () {
             this.value = this.slugify(this.value)
             
-            this.hasManualInput = !!this.value
+            this.hasManualInput = ! ! this.value
             
             // Set from source
-            if (this.readFrom && !this.hasManualInput) {
+            if (this.readFrom && ! this.hasManualInput) {
                 this.updateFieldFromSource()
             }
         },

@@ -18,29 +18,29 @@ class BlogServiceProvider extends PackageServiceProvider
      * @var string
      */
     protected $package = 'blog';
-    
+
     /**
      * Bootstrap the application services.
      */
     public function boot()
     {
         parent::boot();
-        
+
         $this->registerViewComposers();
     }
-    
+
     /**
      * Register all publishable module assets.
      */
     protected function registerPublishableResources()
     {
         parent::registerPublishableResources();
-        
+
         $this->publishes([
             $this->getPackageDirectory() . '/resources/assets/src' => resource_path("assets/vendor/{$this->package}"),
         ], 'source');
     }
-    
+
     /**
      * Register package middleware.
      *
@@ -52,7 +52,7 @@ class BlogServiceProvider extends PackageServiceProvider
         $router->middleware('blog.auth', RedirectIfGuest::class);
         $router->middleware('blog.guest', RedirectIfAuthenticated::class);
     }
-    
+
     /**
      * Map out all module routes.
      */
@@ -60,7 +60,7 @@ class BlogServiceProvider extends PackageServiceProvider
     {
         app(AdminRouter::class);
     }
-    
+
     /**
      * Register package view composers.
      */

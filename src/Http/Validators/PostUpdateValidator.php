@@ -16,7 +16,7 @@ class PostUpdateValidator extends Validator
     {
         return [
             'title' => 'string|max:180',
-            'slug' => ['string', 'alpha_dash','max:180', Rule::unique('blog_posts')->where('deleted_at', 'NULL')->ignore($this->post)],
+            'slug' => ['string', 'alpha_dash', 'max:180', Rule::unique('blog_posts')->where('deleted_at', 'NULL')->ignore($this->post)],
             'body' => 'string|max:4194303',
             'is_draft' => 'boolean',
             'published_at' => 'date_format:d/m/Y',

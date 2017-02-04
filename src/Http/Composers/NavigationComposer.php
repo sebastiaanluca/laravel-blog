@@ -11,7 +11,7 @@ class NavigationComposer
      * @var \SebastiaanLuca\Blog\Models\Post
      */
     protected $posts;
-    
+
     /**
      * NavigationComposer constructor.
      *
@@ -21,7 +21,7 @@ class NavigationComposer
     {
         $this->posts = $posts;
     }
-    
+
     /**
      * Bind data to the view.
      *

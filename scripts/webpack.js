@@ -27,7 +27,7 @@ const config = {
         // An absolute path to the desired output directory
         path: path.resolve(process.cwd(), target),
         
-        // A filename pattern for the output files. This would create 
+        // A filename pattern for the output files. This would create
         // `global.js` and `portfolio.js`
         filename: `scripts/${defaultFilename}.js`,
         
@@ -134,7 +134,7 @@ const config = {
             
             CodeMirror: 'codemirror',
         }),
-    
+        
         // Exclude unicode table from slug package
         // See https://github.com/dodo/node-slug (at the bottom)
         // See https://github.com/dodo/node-slug/issues/62
@@ -157,7 +157,7 @@ const config = {
     ],
     
     resolve: {
-        // Resolve modules from these directories. Allows to use 
+        // Resolve modules from these directories. Allows to use
         // vendor/module instead of referencing relatively (../../../)
         modulesDirectories: ['node_modules', 'modules'],
         
@@ -175,11 +175,11 @@ const config = {
     },
     
     // Parses file loaders (only file-loader?) name string and enables you
-    // to replace elements within it. Used here to provide a context to 
-    // image-webpack-loader and prevent images being placed in 
+    // to replace elements within it. Used here to provide a context to
+    // image-webpack-loader and prevent images being placed in
     // e.g. public/assets/modules/theme/resources/images
     customInterpolateName: function (url, name, options) {
-        if (this.query.indexOf('manipulateImageContext') !== -1) {
+        if (this.query.indexOf('manipulateImageContext') !== - 1) {
             url = url.substring(url.indexOf('images'))
         }
         
