@@ -10,22 +10,23 @@ class CreateBlogPostsTable extends Migration
      */
     public function migrateUp()
     {
-        $this->schema->create('blog_posts', function(Blueprint $table) {
+        $this->schema->create('blog_posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('slug', 180)->unique()->index();
-            
-            $table->softDeletes();
-            $table->timestamp('published_at')->nullable();
-            $table->boolean('is_draft')->default(true);
-            
-            $table->string('title', 180);
+
+            $table->string('slug', 191)->unique()->index();
+
+            $table->string('title', 191);
             $table->text('intro')->nullable();
             $table->mediumText('body');
-            
+
+            $table->timestamp('published_at')->nullable();
+            $table->boolean('is_draft')->default(true);
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
-    
+
     /**
      * Reverse the migrations.
      */
