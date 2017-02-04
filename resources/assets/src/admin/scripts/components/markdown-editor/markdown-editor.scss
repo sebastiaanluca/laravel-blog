@@ -1,0 +1,31 @@
+@import '~simplemde/debug/simplemde.css';
+
+$gray: #55595C;
+$gray-lightest: darken(#FFFFFF, 8);
+
+.editor-toolbar {
+    //opacity: 1;
+    border: none;
+    //background-color: $gray-lightest;
+    background-color: darken(#FFFFFF, 1);
+    
+    &:hover {
+        opacity: 1;
+    }
+    
+    a {
+        color: $gray !important;
+    }
+}
+
+.CodeMirror,
+.CodeMirror-scroll {
+    min-height: 200px;
+    max-height: 100vh;
+}
+
+.CodeMirror {
+    //@extend .form-control;
+    border: 1px solid rgba(0, 0, 0, .05) !important;
+    border-radius: 0;
+}

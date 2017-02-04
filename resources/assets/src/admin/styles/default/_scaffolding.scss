@@ -1,0 +1,67 @@
+/* Automated margins and paddings */
+
+$spacings: (
+    'margin',
+    'margin-top',
+    'margin-right',
+    'margin-bottom',
+    'margin-left',
+    'padding',
+    'padding-top',
+    'padding-right',
+    'padding-bottom',
+    'padding-left'
+);
+
+$spacingOptions: (
+    'none': '0px',
+    'xxs': '5px',
+    'xs': '10px',
+    'sm': '20px',
+    'md': '30px',
+    'lg': '40px',
+    'xl': '60px',
+    'xxl': '80px',
+    'auto': auto,
+);
+
+@each $spacing in $spacings {
+    @each $sKey, $sValue in $spacingOptions {
+        .#{$spacing}-#{$sKey} {
+            #{$spacing}: #{$sValue};
+        }
+    }
+}
+
+/* Flexing */
+
+.flex {
+    display: flex;
+}
+
+.flex-rows {
+    flex-flow: row wrap;
+}
+
+.inline-flex {
+    display: inline-flex;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+/* Content */
+
+.content-wrapper {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+}

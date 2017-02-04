@@ -22,6 +22,38 @@ We accept contributions via Pull Requests on [Github](https://github.com/sebasti
 - **Send coherent history** - Make sure each individual commit in your pull request is meaningful. If you had to make multiple intermediate commits while developing, please [squash them](http://www.git-scm.com/book/en/v2/Git-Tools-Rewriting-History#Changing-Multiple-Commit-Messages) before submitting.
 
 
+## Development
+
+Note: execute all commands in the root of the package.
+
+### Autoload
+
+`composer install` in the package directory + add to `bootstrap/autoload.php`:
+
+```
+// Autoload our package's vendors
+require __DIR__.'/../packages/sebastiaanluca/blog/vendor/autoload.php';
+```
+
+Create a .env file with `SERVE_PROXY_TARGET` in it.
+
+```
+yarn install
+yarn run build
+```
+
+### Symlink dev build directory
+
+Symlink local dev build dir to `public/vendor/blog`.
+
+### Build assets
+
+`yarn run build`
+
+### Auto-reloading server
+
+`yarn run serve`
+
 ## Running Tests
 
 ``` bash

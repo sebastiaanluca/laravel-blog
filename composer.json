@@ -1,10 +1,11 @@
 {
     "name": "sebastiaanluca/laravel-blog",
     "type": "library",
-    "description": "A simple-to-use blog system you can pull into any existing Laravel project and immediately get writing.",
+    "description": "A simple-to-use blog system you can pull into any existing Laravel project.",
     "keywords": [
-        "SebastiaanLuca",
-        "Blog"
+        "Laravel",
+        "Blog",
+        "Sebastiaan Luca"
     ],
     "homepage": "https://www.github.com/sebastiaanluca/laravel-blog",
     "license": "MIT",
@@ -13,16 +14,23 @@
             "name": "Sebastiaan Luca",
             "email": "hello@sebastiaanluca.com",
             "homepage": "https://www.sebastiaanluca.com",
-            "role": "Developer"
+            "role": "Author"
         }
     ],
     "require": {
-        "illuminate/support": "~5.1",
-        "php": "~5.6|~7.0"
+        "php": "^7",
+        "graham-campbell/markdown": "^7",
+        "illuminate/support": "^5.3",
+        "laravel/framework": "^5.3",
+        "laravelcollective/html": "^5.3",
+        "nesbot/carbon": "^1.21",
+        "sebastiaanluca/laravel-helpers": "^0.3",
+        "sebastiaanluca/laravel-router": "^2.1.2",
+        "sebastiaanluca/laravel-unbreakable-migrations": "^0.1",
+        "sebastiaanluca/laravel-validator": "^0.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.0||~5.0",
-        "squizlabs/php_codesniffer": "^2.3"
+        "phpunit/phpunit": "^5|^6"
     },
     "autoload": {
         "psr-4": {
@@ -31,13 +39,11 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "SebastiaanLuca\\Blog\\": "tests"
+            "SebastiaanLuca\\Blog\\Tests\\": "tests"
         }
     },
     "scripts": {
-        "test": "phpunit",
-        "check-style": "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests",
-        "fix-style": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests"
+        "test": "phpunit"
     },
     "extra": {
         "branch-alias": {

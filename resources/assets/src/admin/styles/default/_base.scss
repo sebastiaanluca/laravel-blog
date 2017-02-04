@@ -1,0 +1,129 @@
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap-datepicker/dist/css/bootstrap-datepicker';
+
+//
+
+body {
+    padding-bottom: 3rem;
+}
+
+.container {
+    max-width: 960px;
+    @include make-container();
+}
+
+.flex {
+    display: flex;
+}
+
+.navbar {
+    font-size: 1.2rem;
+    z-index: 1;
+}
+
+.navbar-brand,
+.navbar-title {
+    padding: 0;
+    margin-right: 2rem;
+    margin-bottom: 0;
+    font-size: $font-size-h1;
+    font-weight: normal;
+    
+    a {
+        color: inherit;
+    }
+}
+
+.navbar .nav-item + .nav-item {
+    margin-left: 2rem;
+}
+
+.navbar .tag.tag-default {
+    background-color: $gray-lighter;
+    color: $gray;
+    padding: .4rem;
+}
+
+#nav-user .user-avatar {
+    margin-right: 8px;
+}
+
+.btn-default {
+    background-color: $gray-lightest;
+    border: none;
+}
+
+.dropdown-menu {
+    box-shadow: 0 1px 10px $gray-lightest;
+}
+
+.dropdown-menu .dropdown-header,
+.dropdown-menu .dropdown-item {
+    padding-top: .6rem;
+    padding-bottom: .6rem;
+    border-radius: $border-radius;
+}
+
+.dropdown-menu .dropdown-header {
+    padding-bottom: .1rem;
+}
+
+.dropdown-menu .dropdown-item.button,
+.dropdown-menu .dropdown-item.btn {
+    line-height: $line-height-base;
+    outline: none;
+}
+
+.btn-submit {
+    float: right;
+}
+
+.form-control-label {
+    color: $gray-light;
+}
+
+// Optional form label
+.form-optional label:after {
+    content: '(optional)';
+    margin-left: 4px;
+    font-weight: normal;
+    color: $text-muted;
+}
+
+/* Cards */
+
+.card {
+    box-shadow: 0 2px $gray-lightest;
+}
+
+.card-header {
+    padding: 1.25rem 1.25rem .75rem 1.25rem;
+    background: none;
+}
+
+.card-title {
+    margin-bottom: 1.2rem;
+    
+    a {
+        color: inherit;
+    }
+}
+
+@mixin row-gutter-size($size) {
+    margin-right: -$size;
+    margin-left: -$size;
+    
+    & > [class^="col-"],
+    & > [class*=" col-"] {
+        padding-right: $size;
+        padding-left: $size;
+    }
+}
+
+.post-cards-list {
+    @include row-gutter-size(.5rem);
+    
+    .card {
+        margin-bottom: .5rem * 2;
+    }
+}
