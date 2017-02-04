@@ -49,8 +49,8 @@ class BlogServiceProvider extends PackageServiceProvider
      */
     protected function bootMiddleware(Kernel $kernel, Router $router)
     {
-        $router->middleware('blog.auth', RedirectIfGuest::class);
-        $router->middleware('blog.guest', RedirectIfAuthenticated::class);
+        $router->aliasMiddleware('blog.auth', RedirectIfGuest::class);
+        $router->aliasMiddleware('blog.guest', RedirectIfAuthenticated::class);
     }
 
     /**
