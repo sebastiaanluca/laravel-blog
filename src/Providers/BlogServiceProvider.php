@@ -2,6 +2,7 @@
 
 namespace SebastiaanLuca\Blog\Providers;
 
+use GrahamCampbell\Markdown\MarkdownServiceProvider;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\View;
@@ -9,6 +10,9 @@ use SebastiaanLuca\Blog\Http\Composers\NavigationComposer;
 use SebastiaanLuca\Blog\Http\Middleware\RedirectIfAuthenticated;
 use SebastiaanLuca\Blog\Http\Middleware\RedirectIfGuest;
 use SebastiaanLuca\Blog\Http\Routers\AdminRouter;
+use SebastiaanLuca\Helpers\Html\HtmlServiceProvider;
+use SebastiaanLuca\Helpers\Methods\GlobalMethodsServiceProvider;
+use SebastiaanLuca\Router\RouterServiceProvider;
 
 class BlogServiceProvider extends PackageServiceProvider
 {
@@ -27,6 +31,17 @@ class BlogServiceProvider extends PackageServiceProvider
         parent::boot();
 
         $this->registerViewComposers();
+    }
+
+    /**
+     * Register additional service providers.
+     */
+    protected function registerProviders()
+    {
+        $this->app->register(RouterServiceProvider::class);
+        $this->app->register(GlobalMethodsServiceProvider::class);
+        $this->app->register(HtmlServiceProvider::class);
+        $this->app->register(MarkdownServiceProvider::class);
     }
 
     /**

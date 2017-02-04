@@ -26,6 +26,7 @@ abstract class PackageServiceProvider extends ServiceProvider
     public function register()
     {
         $this->configure();
+        $this->registerProviders();
         $this->bindRepositories();
         $this->registerCommands();
     }
@@ -50,6 +51,14 @@ abstract class PackageServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             $this->getPackageDirectory() . '/config/config.php', $this->package
         );
+    }
+
+    /**
+     * Register additional service providers.
+     */
+    protected function registerProviders()
+    {
+        //
     }
 
     /**
